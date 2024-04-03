@@ -1,0 +1,13 @@
+click
+Flask
+Flask-SQLAlchemy
+greenlet
+importlib-metadata
+itsdangerous
+Jinja2
+MarkupSafe
+nose
+SQLAlchemy
+SQLAlchemy-Utils
+Werkzeug
+zipp
