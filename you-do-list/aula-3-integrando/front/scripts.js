@@ -39,11 +39,11 @@ function showPopup(titulo, descricao, status, prazo) {
     popup.innerHTML = `<strong>Título:</strong> ${titulo}<br>
                        <strong>Descrição:</strong> ${descricao}<br>
                        <strong>Status:</strong> ${status}<br>
-                       <strong>Prazo:</strong> ${prazo}`;
+                       <strong>Prazo:</strong> ${prazo}<br>`;
     popup.style.display = "block";
 }
+
 
 function hidePopup() {
     document.getElementById("taskPopup").style.display = 'none';
 }
-
