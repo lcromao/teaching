@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<!-- Cabeçalho do HTML -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>You-do</title>
+    <link rel="icon" href="img/you-do-list.png" type="image/png">
+</head>
+
+<!-- Corpo do HTML -->
+<body>
+    
+    <header>
+        <header>
+            <h1 style="text-align: center;">You-do list</h1>
+        </header>
+    </header>
+
+    <section class="newItem">
+        <input type="text" id="titulo" placeholder="Tarefa">
+        <select id="status" placeholder="Status">
+            <option value="Pendente">Pendente</option>
+            <option value="Em Andamento">Em Andamento</option>
+            <option value="Urgente">Urgente</option>
+            <option value="Concluído">Concluído</option>
+        </select>
+        <input type="date" id="prazo" placeholder="Prazo">
+        <input type="text" id="descricao" placeholder="Descreva a tarefa">
+        <span onclick="novaTarefa()" class="addBtn">Adicionar</span>
+    </section>
+
+    <section class="items">
+        <ul id="minhasTarefas">
+            <div id="taskPopup" onclick="hidePopup()"></div>
+        </ul>
+    </section>
+    
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

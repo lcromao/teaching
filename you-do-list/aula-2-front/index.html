@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<!-- Cabeçalho do HTML -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>You-do</title>
+    <link rel="icon" href="img/you-do-list.png" type="image/png">
+</head>
+
+<!-- Corpo do HTML -->
+<body>
+    <!-- Para fazer o cabeçalho da página -->
+    <header>
+        <h1>
+            You-do list
+            <img src="img/you-do-list.png" alt="You-do list logo">
+        </h1>
+    </header>
+
+    <!-- Para fazer o formulário de adicionar tarefas -->
+    <section class="newItem">
+        <div class="input-row">
+            <input type="text" id="titulo" placeholder="Tarefa">
+            <input type="date" id="prazo" placeholder="Prazo">
+            <select id="status" placeholder="Status">
+                <option value="Pendente">Pendente</option>
+                <option value="Em Andamento">Em Andamento</option>
+                <option value="Urgente">Urgente</option>
+                <option value="Concluído">Concluído</option>
+            </select>
+        </div>
+        <textarea id="descricao" placeholder="Descreva a tarefa"></textarea>
+        <span onclick="novaTarefa()" class="addBtn">Adicionar</span>
+    </section>
+    
+    <!-- Para fazer a lista de tarefas -->
+    <div id="taskPopup" onclick="hidePopup()"></div>
+    <section class="items">
+        <ul id="minhasTarefas">
+            
+        </ul>
+    </section>
+    
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

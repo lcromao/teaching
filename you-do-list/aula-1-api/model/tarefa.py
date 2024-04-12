@@ -14,7 +14,7 @@ class Tarefa(Base):
     id = Column("id_tarefa", Integer, primary_key=True, autoincrement=True)
     titulo = Column(String(140), unique=True)
     descricao = Column(String(4000))
-    status = Column(Enum('Pendente', 'Concluida', 'Cancelada', 'Urgente',
+    status = Column(Enum('Pendente', 'Concluida', 'Em Andamento', 'Urgente',
                          name='status_tarefa'))
     data_criacao = Column(DateTime, default=datetime.now())
     prazo = Column(DateTime)

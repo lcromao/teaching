@@ -1,0 +1,230 @@
+body{
+    font-family: tahoma;  
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #004467;
+}
+
+header {
+    background-color: #004467;
+    padding: 2px 0;
+    position: relative;
+    text-align: center ;
+    width: 100%;
+}
+
+header h1 {
+    color: white;
+    display: inline-flex;
+    padding: 6px 12px;
+    position: sticky;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    top: 0px;
+    border: 4px solid white;
+    border-radius: 20px;
+    gap : 10px;
+}
+
+
+header img {
+    width: 50px; /* Your existing width */
+}
+
+/* Estilizamos uma classe iniciando com um "." */
+.newItem {
+    padding: 30px 40px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilizamos uma tag iniciando com um "#" */
+#newInput {
+    margin: 0;
+    border: none;
+    width: 40%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+.addBtn {
+    padding: 9px 10px;
+    background-color: #d9d9d9;
+    color: #555;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+#taskPopup button {
+    display: block; /* Or inline-block, depending on your layout */
+    margin: 10px auto; /* Center button */
+    padding: 5px 15px;
+    background-color: #5cb85c; /* A green color for the edit button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.addBtn:hover {
+    background-color: #2ab53a;
+    color: white;
+}
+
+.items {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.items ul {
+    list-style: none; /* Remove default list styling */
+    padding-left: 0; /* Remove default padding */
+}
+
+.items li {
+    cursor: pointer; /* Change cursor on hover to indicate it's clickable */
+    background-color: #e9ecef;
+    padding: 10px;
+    margin-bottom: 5px; /* Add space between items */
+    border-radius: 5px; /* Optional: rounds corners of list items */
+    text-align: center; /* Center text */
+    width: 25%; /* or any width */
+    margin-left: auto; /* auto margin for left and right to center the box */
+    margin-right: auto;
+}
+
+/* Style for the popup */
+#taskPopup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Popup should float above the page */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000; /* Ensure it's above other items */
+}
+
+/* Optional: Style for the 'close' button inside the popup */
+.close-btn {
+    float: right;
+    cursor: pointer;
+}
+
+.newItem {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px; /* Limit the width and use margin to center */
+    margin: auto;
+    font-family: Helvetica, Helvetica; /* Use a modern font */
+}
+
+.input-row {
+    display: flex;
+    gap: 35px; /* Adjust the space between inputs */
+    margin-bottom: 10px; /* Space between this row and the textarea */
+}
+
+.input-row input,
+.input-row select,
+#descricao {
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 0.375rem 0.75rem; /* Padding inside inputs and textarea */
+    font-size: 1rem; /* Font size similar to the example */
+}
+
+/* Focus style for inputs and select */
+.input-row input:focus,
+.input-row select:focus,
+#descricao:focus {
+    border-color: #80bdff; /* Light blue border for focus */
+    outline: 0; /* Remove default focus outline */
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* Subtle shadow on focus */
+}
+
+/* Style adjustments for the select to make it consistent across browsers */
+.input-row select {
+    -webkit-appearance: none; /* Removes default chrome and safari style */
+    -moz-appearance: none; /* Removes default style Firefox */
+    appearance: none; /* Removes default style */
+    background-position: right 0.75rem center; /* Position the background image */
+    background-repeat: no-repeat; /* No repeat for the background image */
+    padding-right: 2rem; /* Add padding to make space for the image */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg%20width%3D"12"%20height%3D"12"%20viewBox%3D"0%200%2012%2012"%20fill%3D"none"%20xmlns%3D"http%3A//www.w3.org/2000/svg"><path%20fill-rule%3D"evenodd"%20clip-rule%3D"evenodd"%20d%3D"M6.64645%208.64645C6.84171%208.84171%206.65829%209%206.5%209C6.34171%209%206.15829%208.84171%206.35355%208.64645L3.85355%206.14645C3.65829%205.95118%203.65829%205.63431%203.85355%205.43905C4.04882%205.24378%204.36569%205.24378%204.56097%205.43905L6%206.87868L7.43903%205.43905C7.6343%205.24378%207.95117%205.24378%208.14645%205.43905C8.34171%205.63431%208.34171%205.95118%208.14645%206.14645L6.64645%208.64645Z"%20fill%3D"%23333"/></svg>'); /* Add dropdown arrow */
+}
+
+#descricao {
+    height: 75px; /* Adjust the height as needed */
+    margin-bottom: 15px; /* Space between the textarea and the button */
+    resize: vertical; /* Allow only vertical resizing */
+}
+
+.addBtn {
+    padding: 5px 15px; /* Smaller padding to reduce size */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1.5;
+    margin: 0 auto; /* Auto margins for horizontal centering */
+    display: block; /* Make the span behave like a block for margin auto to work */
+    width: fit-content; /* Button width to fit its content */
+}
+
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .input-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+
+/* Remove margins and padding from the list */
+ul {
+    margin: 0;
+    padding: 0;
+    width: 50%;
+}
+
+/* Style the list items */
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+    background: #ddd;
+}
