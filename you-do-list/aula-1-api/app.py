@@ -6,58 +6,33 @@ from flask import redirect, render_template
 from flask_openapi3 import OpenAPI, Info
 from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
-from datetime import date
-from typing import List
-from pydantic import BaseModel
 
+# Importando pacotes criados
 from model import *
+from schemas import *
 
 # Configurando OpenAPI
-info = Info(title="API - Organizador de tarefas", version="1.0.0")
+info = Info(title="You-Do List's API", version="1.0.0")
 app = OpenAPI(__name__, info=info)
-CORS(app)
 
-# ---------Rotas----------
+# ----------Rotas----------
 
-# Home 
+# Rota home
 @app.route('/')
 def home():
-    return {"message": "Hello World!"}
+    return {"message": "Hello World"}
     # return render_template("home.html"), 200
     # return redirect('/openapi')
 
+# Rota para documentação
+@app.route('/doc')
+def doc():
+    """
+    Redireciona para /openapi, tela que permite a escolha do estilo de documentação.
+    """
+    return redirect('/openapi'), 200
 
-# Open API
-@app.route('/api')
-def api():
-    """Redireciona para /openapi, tela que permite a escolha do estilo de documentação.
-    """
-    return redirect('/openapi')
- 
-# POST tarefa 
-class TarefaSchema(BaseModel):
-    """ 
-    Esqueleto para a criação de uma nova tarefa
-    """
-    titulo: str = "Preparar aula 1"
-    descricao: str = "Preparar aula 1 de desenvolvimento full stack básico"
-    status: str = "Pendente"
-    prazo: date = "2024-04-14"
-    
-def apresenta_tarefa(tarefa: Tarefa):
-    """ Método para apresentar uma tarefa.
-    """
-    
-    tarefa_json = {
-        "id": tarefa.id,
-        "titulo": tarefa.titulo,
-        "descricao": tarefa.descricao,
-        "status": tarefa.status,
-        "prazo": tarefa.prazo.isoformat() if tarefa.prazo else None,  # Assume-se que prazo é um objeto date
-    }
-    
-    return tarefa_json    
-    
+# POST Tarefa
 @app.post('/tarefa')
 def add_tarefa(form: TarefaSchema):
     """ 
@@ -86,22 +61,7 @@ def add_tarefa(form: TarefaSchema):
         session.rollback() 
         return {"message": "Não foi possível salvar nova tarefa :/"}, 400
  
-# GET múltiplas tarefas 
-def apresenta_tarefas(tarefas: List[Tarefa]):
-    """ Método para apresentar todas tarefas.
-    """
-    tarefas_json = []
-    for tarefa in tarefas:
-        tarefas_json.append({
-            "id": tarefa.id,
-            "titulo": tarefa.titulo,
-            "descricao": tarefa.descricao,
-            "status": tarefa.status,
-            "prazo": tarefa.prazo.isoformat() if tarefa.prazo else None  # Assume-se que prazo é um objeto date
-        })
-
-    return {"tarefas": tarefas_json}    
-   
+# GET múltiplas tarefas     
 @app.get('/tarefas')
 def get_tarefas():
     """ 
@@ -118,12 +78,6 @@ def get_tarefas():
     
 
 # GET tarefa única
-class TarefaBuscaSchema(BaseModel):
-    """ 
-    Esqueleto para a busca de uma tarefa
-    """
-    titulo: str = "Preparar aula 1"
-
 @app.get('/tarefa')
 def get_tarefa(form: TarefaBuscaSchema):
     """ 
@@ -141,16 +95,6 @@ def get_tarefa(form: TarefaBuscaSchema):
 
 
 # PUT tarefa
-class TarefaUpdateSchema(BaseModel):
-    """ 
-    Esqueleto para a atualização de uma tarefa
-    """
-    tarefa: str = "Preparar aula 1"
-    novo_titulo: str = "Preparar aula 1 - Desenvolvendo APIs"
-    nova_descricao: str = "Preparar aula 1 de desenvolvimento full stack básico. Tema: Desenvolvimento API"
-    novo_status: str = "Urgente"
-    novo_prazo: date = "2024-04-14"
-    
 @app.put('/tarefa')
 def update_produto(form: TarefaUpdateSchema):
     
@@ -173,12 +117,6 @@ def update_produto(form: TarefaUpdateSchema):
         return {"message": "Tarefa de mesmo título já salva na base :/"}, 409
     
 # DELETE tarefa
-class TarefaDeleteSchema(BaseModel):
-    """ 
-    Esqueleto para a deleção de uma tarefa
-    """
-    titulo: str = "Preparar aula 1 - Desenvolvendo APIs"
-    
 @app.delete('/tarefa')
 def delete_tarefa(form: TarefaDeleteSchema):
     
@@ -195,6 +133,8 @@ def delete_tarefa(form: TarefaDeleteSchema):
         session.rollback()
         return {"message": "Erro ao deletar tarefa"}, 409
     
+    
 # Inicializando a aplicação
 if __name__ == '__main__':
     app.run(debug=True)
+    

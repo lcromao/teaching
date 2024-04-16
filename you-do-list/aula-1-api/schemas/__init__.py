@@ -1,0 +1,1 @@
+from schemas.tarefa_schema import *
