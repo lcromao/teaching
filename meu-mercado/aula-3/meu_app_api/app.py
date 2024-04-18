@@ -91,12 +91,12 @@ def get_produto(query: ProdutoBuscaSchema):
 
     Retorna uma representação dos produtos e comentários associados.
     """
-    produto_id = query.id
+    produto_id = query.nome
     logger.debug(f"Coletando dados sobre produto #{produto_id}")
     # criando conexão com a base
     session = Session()
     # fazendo a busca
-    produto = session.query(Produto).filter(Produto.id == produto_id).first()
+    produto = session.query(Produto).filter(Produto.nome == produto_id).first()
 
     if not produto:
         # se o produto não foi encontrado

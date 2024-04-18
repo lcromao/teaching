@@ -8,13 +8,27 @@ from model import Base
 
 # Criando estrutura de dados para o modelo de produto.
 class Tarefa(Base):
+    """Classe para representar uma tarefa.
+
+    Args:
+        Base ()
+        
+    Attributes:
+        id (int): Identificador único da tarefa
+        titulo (str): Título da tarefa
+        descricao (str): Descrição da tarefa
+        status (str): Status da tarefa
+        data_criacao (datetime): Data de criação da tarefa
+        prazo (date): Prazo para realização da tarefa
+    """
+    
     __tablename__ = 'tarefas'
     
     # Configrando cada coluna da tabela de produtos.
     id = Column("id_tarefa", Integer, primary_key=True, autoincrement=True)
     titulo = Column(String(140), unique=True)
     descricao = Column(String(4000))
-    status = Column(Enum('Pendente', 'Concluida', 'Cancelada', 'Urgente',
+    status = Column(Enum('Pendente', 'Concluida', 'Em Andamento', 'Urgente',
                          name='status_tarefa'))
     data_criacao = Column(DateTime, default=datetime.now())
     prazo = Column(DateTime)
