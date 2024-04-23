@@ -1,13 +1,28 @@
-body{
-    font-family: tahoma;  
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    background-color: #004467;
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+body, html {
+    height: 100%; /* Ensures that body and html occupy 100% of the viewport height */
+    margin: 0; /* Removes the default margin of body */
+    font-family: 'Roboto', sans-serif; /* Apply Roboto as the global font, you can switch to 'Lato' if preferred */
+}
+
+body::after {
+    content: ""; /* Necessary for the pseudo-element to be generated */
+    position: absolute; /* Positions the pseudo-element relative to the body */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('img/background.jpg'); /* Sets the background image */
+    background-size: cover; /* Covers the entire area of the pseudo-element */
+    background-position: center; /* Centers the background image */
+    opacity: 0.35; /* Sets the opacity of the background image */
+    z-index: -1; /* Ensures the background stays behind other content */
 }
 
 header {
-    background-color: #004467;
     padding: 2px 0;
     position: relative;
     text-align: center ;
@@ -15,17 +30,18 @@ header {
 }
 
 header h1 {
-    color: white;
+    color: rgb(81, 28, 141);
     display: inline-flex;
     padding: 6px 12px;
     position: sticky;
     justify-content: center; /* Horizontal centering */
     align-items: center; /* Vertical centering */
     top: 0px;
-    border: 4px solid white;
+    border: 4px solid rgb(81, 28, 141);
     border-radius: 20px;
     gap : 10px;
 }
+
 
 
 header img {
@@ -126,7 +142,6 @@ header img {
     flex-direction: column;
     max-width: 600px; /* Limit the width and use margin to center */
     margin: auto;
-    font-family: Helvetica, Helvetica; /* Use a modern font */
 }
 
 .input-row {
@@ -137,7 +152,7 @@ header img {
 
 .input-row input,
 .input-row select,
-#descricao {
+#newDescricao {
     border: 1px solid #ced4da; /* Light gray border */
     border-radius: 0.25rem; /* Rounded corners */
     padding: 0.375rem 0.75rem; /* Padding inside inputs and textarea */
@@ -147,7 +162,7 @@ header img {
 /* Focus style for inputs and select */
 .input-row input:focus,
 .input-row select:focus,
-#descricao:focus {
+#newDescricao:focus {
     border-color: #80bdff; /* Light blue border for focus */
     outline: 0; /* Remove default focus outline */
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* Subtle shadow on focus */
@@ -164,7 +179,7 @@ header img {
     background-image: url('data:image/svg+xml;charset=US-ASCII,<svg%20width%3D"12"%20height%3D"12"%20viewBox%3D"0%200%2012%2012"%20fill%3D"none"%20xmlns%3D"http%3A//www.w3.org/2000/svg"><path%20fill-rule%3D"evenodd"%20clip-rule%3D"evenodd"%20d%3D"M6.64645%208.64645C6.84171%208.84171%206.65829%209%206.5%209C6.34171%209%206.15829%208.84171%206.35355%208.64645L3.85355%206.14645C3.65829%205.95118%203.65829%205.63431%203.85355%205.43905C4.04882%205.24378%204.36569%205.24378%204.56097%205.43905L6%206.87868L7.43903%205.43905C7.6343%205.24378%207.95117%205.24378%208.14645%205.43905C8.34171%205.63431%208.34171%205.95118%208.14645%206.14645L6.64645%208.64645Z"%20fill%3D"%23333"/></svg>'); /* Add dropdown arrow */
 }
 
-#descricao {
+#newDescricao {
     height: 75px; /* Adjust the height as needed */
     margin-bottom: 15px; /* Space between the textarea and the button */
     resize: vertical; /* Allow only vertical resizing */
@@ -227,4 +242,41 @@ ul li:nth-child(odd) {
 /* Darker background-color on hover */
 ul li:hover {
     background: #ddd;
+}
+
+.items {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 10px;
+    font-size: 18px;
+    transition: 0.2s;
+    text-align: start;
+}
+
+table{
+    background-color: white;
+    width: 50%;
+}
+
+tr:nth-child(odd){
+    background-color: #eee;
+}
+
+th:nth-child(1){
+    width: 80%;
+}
+
+tr:hover {
+    background: rgb(200, 199, 199);
 }

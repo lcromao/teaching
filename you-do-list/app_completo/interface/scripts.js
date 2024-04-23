@@ -1,49 +1,150 @@
-// Cria um novo item na lista
-// O objto document é a representação da página HTML que o navegador carregou
+document.addEventListener('DOMContentLoaded', function() {
+    fetchTasks();
+});
 
-function novaTarefa() {
-    var titulo = document.getElementById("titulo").value;
-    var descricao = document.getElementById("descricao").value;
-    var status = document.getElementById("status").value;
-    var prazo = document.getElementById("prazo").value;
+function fetchTasks() {
+    fetch('http://127.0.0.1:5000/tarefas')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('myTable');
+            // First, clear out any existing rows in the table
+            table.querySelectorAll("tr:not(:first-child)").forEach(row => row.remove());
 
-    if (titulo === '' || descricao === '' || prazo === '') {
-        alert("Preencha todos os campos obrigatórios.");
+            data.tarefas.forEach((tarefa) => {
+                const row = table.insertRow();
+                ['titulo', 'descricao', 'prazo', 'status'].forEach((key) => {
+                    const cell = row.insertCell();
+                    cell.textContent = tarefa[key];
+                });
+                const deleteCell = row.insertCell();
+                const updateCell = row.insertCell();
+                insertDeleteButton(deleteCell, tarefa.titulo);
+                insertUpdateButton(updateCell, tarefa);
+            });
+        })
+        .catch(error => {
+            alert('Error fetching tasks: ' + error.message);
+        });
+}
+
+function newItem() {
+    const titulo = document.getElementById('newTitulo').value.trim();
+    const descricao = document.getElementById('newDescricao').value.trim();
+    const prazo = document.getElementById('newPrazo').value.trim();
+    const status = document.getElementById('newStatus').value.trim();
+
+    if (!titulo || !descricao || !prazo || !status) {
+        alert('All fields are required.');
         return;
     }
 
-    // Num primeiro momento    
-    // var li = document.createElement("li"); // List Item 
-    // var conteudoTarefa = `Título: ${titulo}, Descrição: ${descricao}, Status: ${status}, Prazo: ${prazo}`;
-    // var t = document.createTextNode(conteudoTarefa)
-    // li.appendChild(t);
+    const formData = new FormData();
+    formData.append('titulo', titulo);
+    formData.append('descricao', descricao);
+    formData.append('status', status);
+    formData.append('prazo', prazo);
 
-    // Evoluído
-    var li = document.createElement("li");
-    li.textContent = titulo;
-    li.onclick = function() {
-        showPopup(titulo, descricao, status, prazo);
-    }
+    fetch('http://127.0.0.1:5000/tarefa', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Task added successfully.');
+    })
+    .catch((error) => {
+        alert('Error adding task: ' + error.message);
+    });
 
-    document.getElementById("minhasTarefas").appendChild(li);
-
-    // Clearing the input fields after adding the task
-    document.getElementById("titulo").value = "";
-    document.getElementById("descricao").value = "";
-    document.getElementById("status").value = "Pendente"; // Resetting back to default
-    document.getElementById("prazo").value = "";
+    // Clear input fields
+    ['newTitulo', 'newDescricao', 'newPrazo', 'newStatus'].forEach((id) => {
+        document.getElementById(id).value = id === 'newStatus' ? 'Pendente' : '';
+    });
 }
 
-function showPopup(titulo, descricao, status, prazo) {
-    var popup = document.getElementById("taskPopup");
-    popup.innerHTML = `<strong>Título:</strong> ${titulo}<br>
-                       <strong>Descrição:</strong> ${descricao}<br>
-                       <strong>Status:</strong> ${status}<br>
-                       <strong>Prazo:</strong> ${prazo}<br>`;
-    popup.style.display = "block";
+function insertDeleteButton(cell, taskTitle) {
+    const btn = document.createElement("button");
+    btn.textContent = "\u00D7";
+    btn.onclick = function() {
+        if (confirm('Are you sure you want to delete the task?')) {
+            deleteTask(taskTitle);
+        }
+    };
+    cell.appendChild(btn);
 }
 
 
-function hidePopup() {
-    document.getElementById("taskPopup").style.display = 'none';
+
+function deleteTask(taskTitle) {
+    const formData = new FormData();
+    formData.append('titulo', taskTitle);
+    
+    fetch('http://127.0.0.1:5000/tarefa', {
+        method: 'DELETE',
+        body: formData // Sending the title in the form data
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Failed to delete task "${taskTitle}": ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert('Task deleted successfully.');
+    })
+    .catch(error => {
+        alert(`Error deleting task "${taskTitle}": ${error.message}`);
+    });
+}
+
+function insertUpdateButton(cell, tarefa) {
+    const btn = document.createElement("button");
+    btn.textContent = "\u27F3";
+    btn.onclick = function() {
+        updateTask(tarefa);
+    };
+    cell.appendChild(btn);
+}
+
+function updateTask(tarefa) {
+    // The second argument in prompt is the default value that appears in the input box
+
+    var newTitle = prompt("Enter new title:", tarefa.titulo);
+    if (newTitle == null) return;
+    // if (newTitle === null || newTitle === '') {
+    //     newTitle = tarefa.titulo;
+    // }
+
+    var newDescription = prompt("Enter new description:", tarefa.descricao);
+    if (newDescription === null) return;
+
+    var newPrazo = prompt("Enter new deadline (YYYY-MM-DD):", tarefa.prazo);
+    if (newPrazo === null) return;
+
+    var newStatus = prompt("Enter new status:", tarefa.status);
+    if (newStatus === null) return;
+
+    const formData = new FormData();
+    formData.append('titulo', newTitle);
+    formData.append('descricao', newDescription);
+    formData.append('prazo', newPrazo);
+    formData.append('status', newStatus);
+
+    // Make sure to encode the titulo in case it contains spaces or special characters
+    fetch(`http://127.0.0.1:5000/tarefa?titulo=${encodeURIComponent(tarefa.titulo)}`, {
+        method: 'PUT',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Failed to update task with title ${tarefa.titulo}: ` + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert('Task updated successfully.');
+    })
+    .catch(error => {
+        alert('Error updating task: ' + error.message);
+    });
 }

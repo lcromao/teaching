@@ -1,5 +1,6 @@
 # Importando bibliotecas
 from sqlalchemy.exc import IntegrityError
+from urllib.parse import unquote
 
 # Importando pacotes criados
 from model import *

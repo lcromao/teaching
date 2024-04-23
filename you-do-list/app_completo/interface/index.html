@@ -15,40 +15,45 @@
 
 <!-- Corpo do HTML -->
 <body>
+
     <!-- Para fazer o cabeçalho da página -->
     <header>
         <h1>
             You-do list
-            <img src="img/you-do-list.png" alt="You-do list logo">
         </h1>
     </header>
 
     <!-- Para fazer o formulário de adicionar tarefas -->
     <section class="newItem">
         <div class="input-row">
-            <input type="text" id="titulo" placeholder="Tarefa">
-            <input type="date" id="prazo" placeholder="Prazo">
-            <select id="status" placeholder="Status">
+            <input type="text" id="newTitulo" placeholder="Tarefa">
+            <input type="date" id="newPrazo" placeholder="Prazo">
+            <select id="newStatus" placeholder="Status">
                 <option value="Pendente">Pendente</option>
                 <option value="Em Andamento">Em Andamento</option>
                 <option value="Urgente">Urgente</option>
                 <option value="Concluído">Concluído</option>
             </select>
         </div>
-        <textarea id="descricao" placeholder="Descreva a tarefa"></textarea>
-        <span onclick="novaTarefa()" class="addBtn">Adicionar</span>
+        <textarea id="newDescricao" placeholder="Descreva a tarefa"></textarea>
+        <span onclick="newItem()" class="addBtn">Programar</span>
     </section>
     
-    <!-- Para fazer a lista de tarefas -->
-    <div id="taskPopup" onclick="hidePopup()"></div>
+    <!-- Tabela com items existentes -->
     <section class="items">
-        <ul id="minhasTarefas">
-            
-        </ul>
+        <table id="myTable">
+            <tr>
+                <th>Titulo</th>
+                <th>Descrição</th>
+                <th>Prazo</th>
+                <th>Status</th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15" height="15"></th>
+                <th><img src="img/edit.png" width="15" height="15"></th>
+            </tr>
+        </table>
     </section>
     
 
     <script src="scripts.js"></script>
 </body>
-
 </html>
