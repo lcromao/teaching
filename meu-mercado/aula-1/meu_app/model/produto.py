@@ -5,13 +5,11 @@ from typing import Union
 
 from  model import Base, Comentario
 
-# Utilizaremos ORM: Object Relational Mapping
-# Permitir que o SQLAlchemy faça o mapeamento entre o objeto e a tabela
 
 class Produto(Base):
     __tablename__ = 'produto'
-    
-    id = Column("pk_produto", Integer, primary_key=True) # Nome da coluna id no database será 'pk_produto'
+
+    id = Column("pk_produto", Integer, primary_key=True)
     nome = Column(String(140), unique=True)
     quantidade = Column(Integer)
     valor = Column(Float)

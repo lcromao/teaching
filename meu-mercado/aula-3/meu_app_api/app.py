@@ -13,7 +13,7 @@ info = Info(title="Minha API", version="1.0.0")
 app = OpenAPI(__name__, info=info)
 CORS(app)
 
-# definindo tags para agrupamento das rotas
+# definindo tags
 home_tag = Tag(name="Documentação", description="Seleção de documentação: Swagger, Redoc ou RapiDoc")
 produto_tag = Tag(name="Produto", description="Adição, visualização e remoção de produtos à base")
 comentario_tag = Tag(name="Comentario", description="Adição de um comentário à um produtos cadastrado na base")
@@ -91,12 +91,12 @@ def get_produto(query: ProdutoBuscaSchema):
 
     Retorna uma representação dos produtos e comentários associados.
     """
-    produto_id = query.nome
+    produto_id = query.id
     logger.debug(f"Coletando dados sobre produto #{produto_id}")
     # criando conexão com a base
     session = Session()
     # fazendo a busca
-    produto = session.query(Produto).filter(Produto.nome == produto_id).first()
+    produto = session.query(Produto).filter(Produto.id == produto_id).first()
 
     if not produto:
         # se o produto não foi encontrado
@@ -107,42 +107,6 @@ def get_produto(query: ProdutoBuscaSchema):
         logger.debug(f"Produto econtrado: '{produto.nome}'")
         # retorna a representação de produto
         return apresenta_produto(produto), 200
-    
-
-@app.put('/produto', tags=[produto_tag],
-         responses={"200": ProdutoViewSchema, "404": ErrorSchema, "400": ErrorSchema})
-def update_produto(query: ProdutoBuscaSchema, form: ProdutoSchema):
-    """Atualiza um Produto existente na base de dados com base no nome
-
-    Retorna uma representação dos produtos e comentários associados.
-    """
-    # Nome do produto a ser atualizado
-    produto_nome = query.nome
-
-    # Primeiro, verifique se o produto com o nome fornecido existe
-    session = Session()
-    produto = session.query(Produto).filter(Produto.nome == produto_nome).first()
-
-    if not produto:
-        error_msg = "Produto não encontrado na base :/"
-        logger.warning(f"Erro ao atualizar produto '{produto_nome}', {error_msg}")
-        return {"message": error_msg}, 404
-
-    # Atualize os campos do produto com os dados fornecidos no JSON da solicitação
-    produto.nome = form.nome
-    produto.quantidade = form.quantidade
-    produto.valor = form.valor
-
-    try:
-        # Efetue a atualização do produto
-        session.commit()
-        logger.debug(f"Produto '{produto_nome}' atualizado")
-        return apresenta_produto(produto), 200
-
-    except Exception as e:
-        error_msg = "Não foi possível atualizar o produto :/"
-        logger.warning(f"Erro ao atualizar produto '{produto_nome}', {error_msg}")
-        return {"message": error_msg}, 400
 
 
 @app.delete('/produto', tags=[produto_tag],

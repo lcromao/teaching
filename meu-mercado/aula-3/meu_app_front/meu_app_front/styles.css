@@ -102,11 +102,6 @@ header {
     font-weight: bolder;
 }
 
-.update:hover {
-    color: #000000;
-    font-weight: bolder;
-}
-
 table,
 th,
 td {

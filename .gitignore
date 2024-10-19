@@ -60,3 +60,7 @@ database/
 # Extra #
 ######################
 .idea/
+
+# Mac OS files #
+######################
+*.DS_Store
