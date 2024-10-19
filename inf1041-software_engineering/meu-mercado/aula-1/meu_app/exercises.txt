@@ -1,0 +1,31 @@
+Testando a API
+
+1. Crie um produto com o corpo JSON
+2. Verifique como ele foi salvo na base de dados
+3. Faça o GET do produto criado utilizando a rota especificada (navegador e thunder)
+4. Crie outro produto com o corpo form, em seguida, o mesmo dos passos 2 e 3
+5. Exclua o produto 1 utilizando o método "DELETE"
+6. Busque pelo produto 1 na base de dados. Em seguida, busque pelo produto 2. Comente sobre o que aconteceu
+7. Crie mais um produto 
+8. Adicione um comentário em algum produto
+9. Faça o GET do produto em que acabou de adicionar um comentário
+10. Por último, atualize um produto utilizando o método PUT ou POST
+
+
+----------
+
+# English version #
+####################
+
+Testing the API
+
+1. Create a product with JSON body
+2. Check how it was saved in the database
+3. GET the created product using the specified route (browser and thunder)
+4. Create another product with the body form then the same as steps 2 and 3
+5. Delete product 1 using the "DELETE" method
+6. Search for product 1 in the database. Then search for the product 2. Comment on what happened
+7. Create another product 
+8. Add a comment on a product
+9. GET the product you just added a review to
+10. Lastly, update a product using the PUT or POST method
