@@ -1,2 +1,1 @@
-# bootcamp-fullstack
-Esse repositório contém os projetos disponíveis para ensino de Full-Stack development para a disciplina Engenharia de Software (INF-1041)
+Esse repositório contém os projetos disponíveis para ensino das disciplinas **INF1041 - Engenharia de Software** (BSc level) e das Sprints de **Gestão Ágil de Processos e Produtos** e **Qualidade de Software, Segurança e Sistemas Inteligentes** ([Especialização em Engenharia de Software](https://especializacao.ccec.puc-rio.br/especializacao/engenharia-de-software)) da PUC-Rio.

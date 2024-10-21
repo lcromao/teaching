@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<!-- Cabeçalho do HTML -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>You-do</title>
+    <link rel="icon" href="img/you-do-list.png" type="image/png">
+</head>
+
+<!-- Corpo do HTML -->
+<body>
+
+    <!-- Para fazer o cabeçalho da página -->
+    <header>
+        <h1>
+            You-do list
+        </h1>
+    </header>
+
+    <!-- Para fazer o formulário de adicionar tarefas -->
+    <section class="newItem">
+        <div class="input-row">
+            <input type="text" id="newTitulo" placeholder="Tarefa">
+            <input type="date" id="newPrazo" placeholder="Prazo">
+            <select id="newStatus" placeholder="Status">
+                <option value="Pendente">Pendente</option>
+                <option value="Em Andamento">Em Andamento</option>
+                <option value="Urgente">Urgente</option>
+                <option value="Concluído">Concluído</option>
+            </select>
+        </div>
+        <textarea id="newDescricao" placeholder="Descreva a tarefa"></textarea>
+        <span onclick="newItem()" class="addBtn">Programar</span>
+    </section>
+    
+    <!-- Tabela com items existentes -->
+    <section class="items">
+        <table id="myTable">
+            <tr>
+                <th>Titulo</th>
+                <th>Descrição</th>
+                <th>Prazo</th>
+                <th>Status</th>
+                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15" height="15"></th>
+                <th><img src="img/edit.png" width="15" height="15"></th>
+            </tr>
+        </table>
+    </section>
+    
+
+    <script src="scripts.js"></script>
+</body>
+</html>
