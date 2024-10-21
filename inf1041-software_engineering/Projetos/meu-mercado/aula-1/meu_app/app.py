@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template("home.html"), 200
+    return render_template("home.html"), 200 # Tente trocar para pretty_home
 
 
 @app.route('/favicon.ico')
@@ -107,6 +107,7 @@ def update_produto(produto_id):
 @app.route('/del_produto/<produto_id>', methods=['DELETE'])
 def del_produto(produto_id):
     session = Session()
+    # Deletando o produto pelo id
     count = session.query(Produto).filter(Produto.id == produto_id).delete()
     session.commit()
     if count ==1:
@@ -120,19 +121,23 @@ def del_produto(produto_id):
 @app.route('/add_comentario/<produto_id>', methods=['POST'])
 def add_comentario(produto_id):
     session = Session()
+    # Buscando o produto pelo id
     produto = session.query(Produto).filter(Produto.id == produto_id).first()
     if not produto:
         error_msg = "Produto não encontrado na base :/"
         return render_template("error.html", error_code= 404, 
                                error_msg=error_msg), 404
 
+    # Recebendo os valores do comentário
     autor = request.form.get("autor")
     texto = request.form.get("texto")
     n_estrelas = request.form.get("n_estrela")
     if n_estrelas:
         n_estrelas = int(n_estrelas)
 
+    # Criando o comentário
     comentario = Comentario(autor, texto, n_estrelas)
+    # Adicionando o comentário ao produto
     produto.adiciona_comentario(comentario)
     session.commit()
     return render_template("produto.html", produto=produto), 200
