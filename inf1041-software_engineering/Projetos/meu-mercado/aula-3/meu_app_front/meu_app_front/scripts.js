@@ -47,6 +47,8 @@ const postItem = async (inputProduct, inputQuantity, inputPrice) => {
     });
 }
 
+// Criar config.py
+
 
 /*
   --------------------------------------------------------------------------------------

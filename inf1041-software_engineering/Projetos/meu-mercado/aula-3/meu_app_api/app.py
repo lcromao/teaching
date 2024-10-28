@@ -25,6 +25,9 @@ def home():
     """
     return redirect('/openapi')
 
+# @app.get('/teste', tags=[home_tag])
+# def test():
+#     return "teste"
 
 @app.post('/produto', tags=[produto_tag],
           responses={"200": ProdutoViewSchema, "409": ErrorSchema, "400": ErrorSchema})
