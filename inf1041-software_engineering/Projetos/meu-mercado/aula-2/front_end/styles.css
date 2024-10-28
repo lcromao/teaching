@@ -7,7 +7,7 @@ body{
 }
 
 header {
-    background-color: #004467;
+    background-color: #060a0c;
     padding: 2px 0;
     text-align: center;
     position: relative;
@@ -29,6 +29,7 @@ header h1 {
     color: white;
     display: flex;
     justify-content: center;
+    background-color: #2ab53a;
 }
 
 

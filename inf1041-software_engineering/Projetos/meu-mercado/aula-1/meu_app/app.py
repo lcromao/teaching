@@ -10,7 +10,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template("home.html"), 200 # Tente trocar para pretty_home
+    frutas = ['banana', 'maçã', 'uva']	
+    return render_template("home.html",
+                           frutas=frutas), 200 # Tente trocar para pretty_home
 
 
 @app.route('/favicon.ico')

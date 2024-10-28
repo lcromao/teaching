@@ -10,6 +10,10 @@ Testando a API
 8. Adicione um comentário em algum produto
 9. Faça o GET do produto em que acabou de adicionar um comentário
 10. Por último, atualize um produto utilizando o método PUT ou POST
+11. Para a próxima aula, crie três rotas:
+- Uma rota para cadastrar um usuário [nome, idade, email e senha]
+- Uma rota para listar todos os usuários cadastrados
+- Uma rota para listar um usuário específico
 
 
 ----------
