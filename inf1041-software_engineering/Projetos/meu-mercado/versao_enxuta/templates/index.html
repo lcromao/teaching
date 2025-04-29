@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <title>Lista de Compras</title>
+</head>
+
+<body>
+    <!-- Cabeçalho de informações do sistema -->
+    <header>
+        <div class="title">
+            <h1>Lista de Compras</h1>
+        </div>
+        <div class="banner">
+            <img src="https://images.contentstack.io/v3/assets/blt45c082eaf9747747/bltbcca43584b660977/5de0b6aa703bd50385f981ad/Header-5.jpg?width=1200&height=630&fit=crop"
+                alt="Banner de compras">
+        </div>
+    </header>
+
+    <!-- Opções para adicionar um novo item -->
+    <section class="newItem">
+        <form action="{{ url_for('add_produto') }}" method="post">
+            <input type="text" id="newInput" name="nome" placeholder="Adicionar novo item:" required>
+            <input type="number" id="newQuantity" name="quantidade" placeholder="Quantidade:" required>
+            <input type="number" id="newPrice" name="valor" placeholder="Valor:" required>
+            <button type="submit" class="addBtn">Adicionar</button>
+        </form>
+    </section>
+
+    <!-- Mensagens de feedback -->
+    {% if mensagem %}
+    <div class="message" style="text-align: center; padding: 10px; color: {% if erro %}red{% else %}green{% endif %};">
+        {{ mensagem }}
+    </div>
+    {% endif %}
+
+    <!-- Tabela com items existentes -->
+    <section class="items">
+        <table id="myTable">
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.quantidade }}</td>
+                <td>{{ produto.valor }}</td>
+                <td>
+                    <a href="{{ url_for('comentario', produto_id=produto.id) }}" title="Ver comentários" style="margin-right: 10px; text-decoration: none;">💬</a>
+                    <form action="{{ url_for('delete_produto') }}" method="post" style="display: inline;">
+                        <input type="hidden" name="nome" value="{{ produto.nome }}">
+                        <button type="submit" class="close" style="border: none; background: none;">&times;</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <title>Comentários - {{ produto.nome }}</title>
+    <style>
+        .comentarios {
+            width: 50%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .comentario {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+        .comentario p {
+            margin: 0;
+            padding: 0;
+            background-color: transparent;
+        }
+        .comentario .data {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            min-height: 100px;
+            margin-bottom: 10px;
+        }
+        .voltar {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #f1f1f1;
+            color: #333;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cabeçalho de informações do sistema -->
+    <header>
+        <div class="title">
+            <h1>Comentários - {{ produto.nome }}</h1>
+        </div>
+    </header>
+
+    <div class="comentarios">
+        <h2>Informações do produto</h2>
+        <p><strong>Nome:</strong> {{ produto.nome }}</p>
+        <p><strong>Quantidade:</strong> {{ produto.quantidade }}</p>
+        <p><strong>Valor:</strong> {{ produto.valor }}</p>
+        
+        <h3>Comentários</h3>
+        {% if produto.comentarios %}
+            {% for comentario in produto.comentarios %}
+            <div class="comentario">
+                <p>{{ comentario.texto }}</p>
+                <p class="data">{{ comentario.data_insercao.strftime('%d/%m/%Y %H:%M:%S') }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum comentário para este produto.</p>
+        {% endif %}
+        
+        <form action="{{ url_for('comentario', produto_id=produto.id) }}" method="post">
+            <h3>Adicionar comentário</h3>
+            <textarea name="texto" placeholder="Digite seu comentário..." required></textarea>
+            <button type="submit" class="addBtn">Enviar Comentário</button>
+        </form>
+        
+        <a href="{{ url_for('home') }}" class="voltar">Voltar para Lista de Produtos</a>
+    </div>
+</body>
+
+</html>
