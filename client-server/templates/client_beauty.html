@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Olá Mundo Encantado</title>
+        <style>
+            :root {
+                --bg-1: #1b1f3b;
+                --bg-2: #4b3f72;
+                --accent: #e43f6f;
+                --accent-light: #ffe5ec;
+                --text: #f8f9ff;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                color: var(--text);
+                background: radial-gradient(circle at top left, var(--bg-2), var(--bg-1) 60%), #0d0d1a;
+                overflow: hidden;
+            }
+
+            .glow-orb {
+                position: fixed;
+                width: 450px;
+                height: 450px;
+                background: radial-gradient(circle, rgba(228, 63, 111, 0.55), transparent 70%);
+                filter: blur(30px);
+                animation: float 12s ease-in-out infinite alternate;
+                z-index: 0;
+            }
+
+            .glow-orb:nth-child(2) {
+                top: 10%;
+                left: 65%;
+                animation-delay: -4s;
+            }
+
+            .glow-orb:nth-child(3) {
+                bottom: 5%;
+                left: 10%;
+                animation-delay: -7s;
+            }
+
+            .card {
+                position: relative;
+                z-index: 1;
+                width: min(90vw, 420px);
+                padding: 3.5rem 3rem;
+                border-radius: 28px;
+                background: rgba(22, 25, 58, 0.65);
+                backdrop-filter: blur(18px);
+                box-shadow:
+                    0 25px 55px rgba(0, 0, 0, 0.35),
+                    0 0 0 1px rgba(255, 255, 255, 0.05);
+                text-align: center;
+                overflow: hidden;
+            }
+
+            .card::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                pointer-events: none;
+            }
+
+            h1 {
+                font-size: clamp(2.5rem, 4vw, 3.3rem);
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                margin-bottom: 1.5rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.8rem;
+            }
+
+            h1 span.wave {
+                display: inline-block;
+                animation: wave 1.6s infinite ease-in-out;
+                transform-origin: 60% 60%;
+            }
+
+            p {
+                font-size: clamp(1rem, 2.2vw, 1.2rem);
+                line-height: 1.7;
+                color: rgba(248, 249, 255, 0.8);
+                margin-bottom: 2.5rem;
+            }
+
+            .cta {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.6rem;
+                padding: 0.9rem 2.4rem;
+                border-radius: 999px;
+                border: none;
+                text-decoration: none;
+                font-size: 1rem;
+                letter-spacing: 0.05em;
+                font-weight: 600;
+                background: linear-gradient(135deg, var(--accent), #ff7f9c);
+                color: var(--accent-light);
+                box-shadow:
+                    0 18px 30px rgba(228, 63, 111, 0.35),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+                transition: transform 0.35s ease, box-shadow 0.35s ease, letter-spacing 0.35s ease;
+            }
+
+            .cta:hover {
+                transform: translateY(-4px) scale(1.01);
+                box-shadow:
+                    0 24px 40px rgba(228, 63, 111, 0.4),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+                letter-spacing: 0.08em;
+            }
+
+            .cta svg {
+                width: 1.1rem;
+                height: 1.1rem;
+                fill: currentColor;
+                transition: transform 0.35s ease;
+            }
+
+            .cta:hover svg {
+                transform: translateX(4px);
+            }
+
+            .sparkles {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                overflow: hidden;
+            }
+
+            .sparkles span {
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent 65%);
+                border-radius: 50%;
+                animation: twinkle linear infinite;
+            }
+
+            .sparkles span:nth-child(odd) {
+                animation-duration: 3.5s;
+            }
+
+            .sparkles span:nth-child(even) {
+                animation-duration: 4.8s;
+            }
+
+            @keyframes float {
+                0% {
+                    transform: translate(-10%, -10%) scale(1);
+                }
+
+                100% {
+                    transform: translate(8%, 12%) scale(1.15);
+                }
+            }
+
+            @keyframes wave {
+
+                0%,
+                60%,
+                100% {
+                    transform: rotate(0deg);
+                }
+
+                30% {
+                    transform: rotate(16deg);
+                }
+            }
+
+            @keyframes twinkle {
+
+                0%,
+                100% {
+                    opacity: 0;
+                    transform: translateY(0) scale(0.8);
+                }
+
+                50% {
+                    opacity: 1;
+                    transform: translateY(-12px) scale(1.25);
+                }
+            }
+
+            @media (max-width: 520px) {
+                .card {
+                    padding: 3rem 2.3rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="glow-orb" style="top: 20%; left: 15%;"></div>
+        <div class="glow-orb"></div>
+        <div class="glow-orb"></div>
+
+        <main class="card">
+            <div class="sparkles" aria-hidden="true">
+                <span style="top:12%; left:18%; animation-delay:-1.1s;"></span>
+                <span style="top:28%; left:72%; animation-delay:-2.3s;"></span>
+                <span style="top:48%; left:34%; animation-delay:-3.5s;"></span>
+                <span style="top:62%; left:82%; animation-delay:-0.9s;"></span>
+                <span style="top:78%; left:22%; animation-delay:-1.7s;"></span>
+                <span style="top:88%; left:58%; animation-delay:-2.9s;"></span>
+            </div>
+
+            <h1><span class="wave">👋</span> Olá!</h1>
+            <p>
+                Bem-vindo(a) ao seu pequeno universo digital, onde ideias cintilam,
+                cores dançam e cada linha de código abre novas possibilidades.
+            </p>
+            <a class="cta" href="https://react.dev/" target="_blank" rel="noreferrer">
+                Explorar React
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12h12.17l-4.58-4.59L14 6l7 7-7 7-1.41-1.41L17.17 13H5z" />
+                </svg>
+            </a>
+        </main>
+    </body>
+
+</html>
