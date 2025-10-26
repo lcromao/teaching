@@ -1,0 +1,12 @@
+/* styles.css — Evento Comunidade */
+:root { --bg:#0a0a0a; --card:#111217; --text:#eaeaea; --muted:#b4b6bf; --brand:#34d399; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, Segoe UI; color: var(--text); background: radial-gradient(800px 400px at 50% -20%, #152022, #0a0a0a 60%); }
+.topbar { display:flex; gap: 16px; align-items:center; justify-content:space-between; padding: 16px; background: rgba(0,0,0,.55); position: sticky; top: 0; backdrop-filter: blur(6px); }
+.topbar nav a { color: var(--muted); text-decoration:none; margin-left: 12px; padding: 6px 10px; border-radius: 10px; }
+.topbar nav a:hover, .topbar nav a:focus { background: #1b1c22; color: var(--text); }
+.container { max-width: 880px; margin: 24px auto; padding: 0 16px; }
+h2 { margin-top: 28px; border-left: 4px solid var(--brand); padding-left: 10px; }
+ol { line-height: 1.8; }
+a { color: var(--brand); }
+.foot { text-align:center; padding: 24px 16px; color: var(--muted); border-top: 1px solid #1f2230; }

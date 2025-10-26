@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="To-Do List acessível com tarefa, descrição e deadline. Itens são exibidos e ordenados por data.">
+  <title>To‑Do List — Aula 1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>To‑Do List — Aula 1</h1>
+    <p class="muted">Adicione tarefas com <strong>título</strong>, <strong>descrição</strong> e <strong>deadline</strong>. A lista é ordenada por data.</p>
+  </header>
+
+  <main class="container">
+    <section aria-labelledby="form-title">
+      <h2 id="form-title">Nova tarefa</h2>
+      <form id="todo-form" novalidate>
+        <div class="field">
+          <label for="title">Tarefa <span aria-hidden="true">*</span></label>
+          <input id="title" name="title" type="text" required placeholder="Ex.: Entregar exercício de HTML">
+          <small class="hint">Um nome curto e claro para a tarefa.</small>
+        </div>
+
+        <div class="field">
+          <label for="description">Descrição</label>
+          <textarea id="description" name="description" rows="3" placeholder="Detalhes, links ou instruções adicionais"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="deadline">Deadline <span aria-hidden="true">*</span></label>
+          <input id="deadline" name="deadline" type="date" required>
+          <small class="hint">Use a data de entrega prevista.</small>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Adicionar</button>
+          <button type="reset" class="ghost">Limpar</button>
+        </div>
+        <div id="announce" class="sr-only" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section aria-labelledby="list-title">
+      <h2 id="list-title">Tarefas</h2>
+      <div class="table-wrap">
+        <table class="grid" aria-describedby="sort-hint">
+          <caption class="sr-only">Tabela de tarefas ordenadas por deadline</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tarefa</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Deadline</th>
+            </tr>
+          </thead>
+          <tbody id="todo-body">
+            <!-- Itens inseridos via JavaScript -->
+          </tbody>
+        </table>
+        <p id="sort-hint" class="muted">A lista é ordenada automaticamente por <em>deadline</em> (mais próximo primeiro).</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; 2025 Aula 1 • Exemplo 4 — To‑Do List</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

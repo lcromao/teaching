@@ -1,0 +1,85 @@
+/* styles.css — Portfólio de Músico */
+:root {
+	--bg: #0e0f12;
+	--text: #e7e9ee;
+	--muted: #aeb2bb;
+	--brand: #6aa3ff;
+}
+* {
+	/* Responsividade: inclui padding e border na largura/altura total dos elementos */
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+	color: var(--text);
+	background: linear-gradient(180deg, #12141a, #0e0f12);
+}
+.site-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 20px;
+	border-bottom: 1px solid #1f2230;
+	position: sticky;
+	top: 0;
+	background: rgba(14, 15, 18, 0.85);
+	backdrop-filter: blur(6px);
+}
+.site-header h1 {
+	font-size: 1.25rem;
+	margin: 0;
+}
+.site-header nav a {
+	color: var(--muted);
+	text-decoration: none;
+	margin-left: 14px;
+	padding: 6px 10px;
+	border-radius: 8px;
+}
+.site-header nav a:hover,
+.site-header nav a:focus {
+	color: var(--text);
+	background: #1b2030;
+	outline: none;
+}
+.container {
+	/* Responsividade: define largura máxima para telas grandes, centralizando o conteúdo */
+	max-width: 920px;
+	/* Responsividade: centraliza o container horizontalmente e adiciona margem vertical */
+	margin: 24px auto;
+	/* Responsividade: adiciona espaçamento lateral para telas pequenas */
+	padding: 0 16px;
+}
+h2 {
+	margin-top: 32px;
+	border-bottom: 1px solid #212638;
+	padding-bottom: 8px;
+}
+figure {
+	margin: 16px 0;
+}
+img {
+	border-radius: 12px;
+	display: block;
+	/* Responsividade: garante que imagens nunca ultrapassem a largura do container */
+	max-width: 100%;
+	/* Responsividade: mantém a proporção da imagem ao redimensionar */
+	height: auto;
+}
+ul {
+	line-height: 1.8;
+}
+.site-footer {
+	padding: 24px 16px;
+	text-align: center;
+	border-top: 1px solid #1f2230;
+	color: var(--muted);
+}
+a {
+	color: var(--brand);
+}
+a:focus {
+	outline: 2px solid var(--brand);
+	outline-offset: 3px;
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description"
+            content="Portfólio da musicista Ana Freitas. Biografia, faixas favoritas e contatos." />
+        <title>Portfólio | Ana Freitas</title>
+        <style>
+            /* styles.css — Portfólio de Músico */
+            :root {
+                --bg: #0e0f12;
+                --text: #e7e9ee;
+                --muted: #aeb2bb;
+                --brand: #6aa3ff;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+                color: var(--text);
+                background: linear-gradient(180deg, #12141a, #0e0f12);
+            }
+
+            .site-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px 20px;
+                border-bottom: 1px solid #1f2230;
+                position: sticky;
+                top: 0;
+                background: rgba(14, 15, 18, 0.85);
+                backdrop-filter: blur(6px);
+            }
+
+            .site-header h1 {
+                font-size: 1.25rem;
+                margin: 0;
+            }
+
+            .site-header nav a {
+                color: var(--muted);
+                text-decoration: none;
+                margin-left: 14px;
+                padding: 6px 10px;
+                border-radius: 8px;
+            }
+
+            .site-header nav a:hover,
+            .site-header nav a:focus {
+                color: var(--text);
+                background: #1b2030;
+                outline: none;
+            }
+
+            .container {
+                max-width: 920px;
+                margin: 24px auto;
+                padding: 0 16px;
+            }
+
+            h2 {
+                margin-top: 32px;
+                border-bottom: 1px solid #212638;
+                padding-bottom: 8px;
+            }
+
+            figure {
+                margin: 16px 0;
+            }
+
+            img {
+                border-radius: 12px;
+                display: block;
+                max-width: 100%;
+                height: auto;
+            }
+
+            ul {
+                line-height: 1.8;
+            }
+
+            .site-footer {
+                padding: 24px 16px;
+                text-align: center;
+                border-top: 1px solid #1f2230;
+                color: var(--muted);
+            }
+
+            a {
+                color: var(--brand);
+            }
+
+            a:focus {
+                outline: 2px solid var(--brand);
+                outline-offset: 3px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header class="site-header">
+            <h1>Ana Freitas</h1>
+            <nav aria-label="Seções do site">
+                <a href="#sobre">Sobre</a>
+                <a href="#musicas">Músicas</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </header>
+
+        <main class="container">
+            <section id="sobre">
+                <h2>Sobre</h2>
+                <p>Ana é uma guitarrista brasileira focada em rock instrumental. Toca há 12 anos e se inspira em trilhas
+                    sonoras e ritmos brasileiros.</p>
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/GuitareClassique5.png"
+                        alt="Guitarra clássica apoiada em um suporte" width="360" />
+                    <figcaption>Instrumento favorito da artista.</figcaption>
+                </figure>
+            </section>
+
+            <section id="musicas">
+                <h2>Músicas favoritas</h2>
+                <ul>
+                    <li><strong>Entardecer</strong> — melodia suave com harmônicos e delay.</li>
+                    <li><strong>Pedra &amp; Mar</strong> — riffs marcados em compasso 7/8.</li>
+                    <li><strong>Horizonte</strong> — timbres limpos e camadas de reverb.</li>
+                </ul>
+                <p>Ouça referências no <a href="https://www.youtube.com" target="_blank"
+                        rel="noopener noreferrer">YouTube</a>.</p>
+            </section>
+
+            <section id="contato">
+                <h2>Contato</h2>
+                <p>Agendamentos: <a href="mailto:contato@anaf.com">contato@anaf.com</a></p>
+                <p>Redes: <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+                </p>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <small>&copy; 2025 Ana Freitas</small>
+        </footer>
+    </body>
+
+</html>

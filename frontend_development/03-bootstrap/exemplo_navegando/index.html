@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Empresa{% endblock %}
+
+{% block content %}
+  <!-- Hero Section -->
+  <section class="py-5 bg-primary text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h1 class="display-4 fw-bold">Soluções Inovadoras para Seu Negócio</h1>
+          <p class="lead">Transformamos ideias em realidade com tecnologia de ponta e expertise comprovada.</p>
+          <div class="mt-4">
+            <a href="contact.html" class="btn btn-light btn-lg me-2">
+              <i class="bi bi-envelope-fill me-2"></i>Entre em Contato
+            </a>
+            <a href="about.html" class="btn btn-outline-light btn-lg">
+              <i class="bi bi-arrow-right-circle me-2"></i>Saiba Mais
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src="img/banner.svg" alt="Banner Hero" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="mb-4">Sobre Nossa Empresa</h2>
+          <p>Com mais de uma década de experiência no mercado, somos especialistas em fornecer soluções personalizadas que impulsionam o crescimento e a inovação dos nossos clientes.</p>
+          <p>Nossa equipe multidisciplinar combina conhecimento técnico profundo com uma compreensão genuína das necessidades do negócio, garantindo resultados que superam expectativas.</p>
+          <div class="mt-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-check-circle-fill text-success fs-4 me-3"></i>
+              <span>Excelência em cada projeto</span>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-check-circle-fill text-success fs-4 me-3"></i>
+              <span>Suporte dedicado e contínuo</span>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-check-circle-fill text-success fs-4 me-3"></i>
+              <span>Inovação constante</span>
+            </div>
+          </div>
+          <a href="about.html" class="btn btn-primary mt-3">Conheça Nossa História</a>
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h3 class="text-primary mb-2">500+</h3>
+                  <p class="mb-0">Projetos Concluídos</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h3 class="text-primary mb-2">250+</h3>
+                  <p class="mb-0">Clientes Satisfeitos</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h3 class="text-primary mb-2">15+</h3>
+                  <p class="mb-0">Anos de Experiência</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h3 class="text-primary mb-2">50+</h3>
+                  <p class="mb-0">Especialistas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Serviços Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Nossos Serviços</h2>
+      <p class="text-center mb-5">Oferecemos uma ampla gama de serviços para atender todas as suas necessidades empresariais</p>
+      
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <div class="mb-3">
+                <i class="bi bi-lightbulb-fill text-primary fs-1"></i>
+              </div>
+              <h3 class="card-title">Consultoria Estratégica</h3>
+              <p class="card-text">Análise profunda do seu negócio e desenvolvimento de estratégias personalizadas para maximizar resultados.</p>
+              <a href="services.html#consultoria" class="btn btn-outline-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <div class="mb-3">
+                <i class="bi bi-code-slash text-primary fs-1"></i>
+              </div>
+              <h3 class="card-title">Desenvolvimento</h3>
+              <p class="card-text">Criação de soluções tecnológicas sob medida utilizando as melhores práticas e tecnologias do mercado.</p>
+              <a href="services.html#desenvolvimento" class="btn btn-outline-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <div class="mb-3">
+                <i class="bi bi-headset text-primary fs-1"></i>
+              </div>
+              <h3 class="card-title">Suporte Técnico</h3>
+              <p class="card-text">Equipe especializada disponível para garantir o funcionamento perfeito das suas soluções.</p>
+              <a href="services.html#suporte" class="btn btn-outline-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+      <h2 class="mb-4">Pronto para Transformar Seu Negócio?</h2>
+      <p class="lead mb-4">Entre em contato conosco e descubra como podemos ajudar sua empresa a alcançar novos patamares</p>
+      <a href="contact.html" class="btn btn-light btn-lg me-2">
+        <i class="bi bi-envelope-fill me-2"></i>Fale Conosco
+      </a>
+      <a href="services.html" class="btn btn-outline-light btn-lg">
+        <i class="bi bi-grid-3x3-gap me-2"></i>Ver Serviços
+      </a>
+    </div>
+  </section>
+{% endblock %}

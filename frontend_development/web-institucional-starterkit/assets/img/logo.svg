@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Logo da Empresa</title>
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d6efd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6610f2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Círculo externo -->
+  <circle cx="100" cy="100" r="90" fill="url(#logoGradient)" opacity="0.1"/>
+  
+  <!-- Elemento principal - forma geométrica moderna -->
+  <path d="M 100 30 L 170 80 L 170 120 L 100 170 L 30 120 L 30 80 Z" 
+        fill="url(#logoGradient)" opacity="0.9"/>
+  
+  <!-- Detalhe interno -->
+  <path d="M 100 60 L 140 85 L 140 115 L 100 140 L 60 115 L 60 85 Z" 
+        fill="#ffffff" opacity="0.3"/>
+  
+  <!-- Linha central -->
+  <rect x="95" y="70" width="10" height="60" fill="#ffffff" opacity="0.8" rx="5"/>
+  
+  <!-- Círculo central -->
+  <circle cx="100" cy="100" r="15" fill="#ffffff"/>
+  <circle cx="100" cy="100" r="8" fill="url(#logoGradient)"/>
+</svg>

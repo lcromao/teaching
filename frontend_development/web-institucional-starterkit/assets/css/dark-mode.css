@@ -1,0 +1,209 @@
+/**
+ * Dark-Mode.css
+ * Ajustes específicos para o modo escuro
+ * Este arquivo complementa as variáveis definidas em variables.css
+ */
+
+/* === AJUSTES GERAIS PARA MODO ESCURO === */
+:root[data-theme="dark"] body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* === CARDS NO MODO ESCURO === */
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .card-custom {
+  background-color: var(--background-alt);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .card-body {
+  color: var(--text-color);
+}
+
+/* === BOOTSTRAP COMPONENTS === */
+:root[data-theme="dark"] .bg-light {
+  background-color: var(--background-alt) !important;
+}
+
+:root[data-theme="dark"] .text-dark {
+  color: var(--text-color) !important;
+}
+
+:root[data-theme="dark"] .text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* === LISTA E ACCORDION === */
+:root[data-theme="dark"] .list-group-item {
+  background-color: var(--background-alt);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .accordion-item {
+  background-color: var(--background-alt);
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .accordion-button {
+  background-color: var(--background-alt);
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .accordion-button:not(.collapsed) {
+  background-color: var(--background-section);
+  color: var(--text-color);
+}
+
+/* === ALERTS === */
+:root[data-theme="dark"] .alert-info {
+  background-color: rgba(23, 162, 184, 0.2);
+  border-color: var(--info-color);
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .alert-success {
+  background-color: rgba(40, 167, 69, 0.2);
+  border-color: var(--success-color);
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .alert-warning {
+  background-color: rgba(255, 193, 7, 0.2);
+  border-color: var(--warning-color);
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .alert-danger {
+  background-color: rgba(220, 53, 69, 0.2);
+  border-color: var(--danger-color);
+  color: var(--text-color);
+}
+
+/* === MODAL === */
+:root[data-theme="dark"] .modal-content {
+  background-color: var(--background-alt);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .modal-header {
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .modal-footer {
+  border-color: var(--border-color);
+}
+
+/* === TABELAS === */
+:root[data-theme="dark"] .table {
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+:root[data-theme="dark"] .table-bordered {
+  border-color: var(--border-color);
+}
+
+/* === DROPDOWN === */
+:root[data-theme="dark"] .dropdown-menu {
+  background-color: var(--background-alt);
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .dropdown-item {
+  color: var(--text-color);
+}
+
+:root[data-theme="dark"] .dropdown-item:hover,
+:root[data-theme="dark"] .dropdown-item:focus {
+  background-color: var(--background-section);
+  color: var(--text-color);
+}
+
+/* === NAVBAR TOGGLER === */
+:root[data-theme="dark"] .navbar-toggler {
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* === HERO AJUSTES === */
+:root[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #1a2a3a 0%, #0d1821 100%);
+}
+
+/* === IMAGENS === */
+:root[data-theme="dark"] img {
+  opacity: 0.9;
+  transition: opacity var(--transition-normal);
+}
+
+:root[data-theme="dark"] img:hover {
+  opacity: 1;
+}
+
+/* === BADGES === */
+:root[data-theme="dark"] .badge {
+  border: 1px solid var(--border-color);
+}
+
+/* === BREADCRUMB === */
+:root[data-theme="dark"] .breadcrumb {
+  background-color: var(--background-alt);
+}
+
+:root[data-theme="dark"] .breadcrumb-item,
+:root[data-theme="dark"] .breadcrumb-item a {
+  color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] .breadcrumb-item.active {
+  color: var(--text-color);
+}
+
+/* === PROGRESS BAR === */
+:root[data-theme="dark"] .progress {
+  background-color: var(--background-alt);
+}
+
+/* === TOOLTIP E POPOVER === */
+:root[data-theme="dark"] .tooltip-inner {
+  background-color: var(--background-alt);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+:root[data-theme="dark"] .popover {
+  background-color: var(--background-alt);
+  border-color: var(--border-color);
+}
+
+:root[data-theme="dark"] .popover-body {
+  color: var(--text-color);
+}
+
+/* === SCROLLBAR === */
+:root[data-theme="dark"] ::-webkit-scrollbar {
+  width: 12px;
+}
+
+:root[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 6px;
+}
+
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}

@@ -1,0 +1,122 @@
+/**
+ * Variables.css
+ * Paleta de cores e configurações globais do tema
+ * Edite este arquivo para personalizar as cores do site
+ */
+
+:root {
+  /* === CORES PRINCIPAIS === */
+  --primary-color: #0d6efd;
+  --primary-dark: #0b5ed7;
+  --primary-light: #3d8bfd;
+  
+  --secondary-color: #6c757d;
+  --secondary-dark: #5a6268;
+  --secondary-light: #868e96;
+  
+  --accent-color: #20c997;
+  --accent-dark: #1aa179;
+  --accent-light: #4dd4ac;
+  
+  /* === CORES DO MODO CLARO === */
+  --background-color: #ffffff;
+  --background-alt: #f8f9fa;
+  --background-section: #f5f7fa;
+  
+  --text-color: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+  
+  --border-color: #dee2e6;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  
+  /* === CORES DE ESTADO === */
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  
+  /* === TIPOGRAFIA === */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-heading: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-base: 1.6;
+  --line-height-heading: 1.2;
+  
+  /* === ESPAÇAMENTOS === */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 4rem;
+  
+  /* === BORDAS E RAIOS === */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
+  --border-width: 1px;
+  
+  /* === SOMBRAS === */
+  --shadow-sm: 0 0.125rem 0.25rem var(--shadow-color);
+  --shadow-md: 0 0.5rem 1rem var(--shadow-color);
+  --shadow-lg: 0 1rem 3rem var(--shadow-color);
+  
+  /* === TRANSIÇÕES === */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+  
+  /* === NAVBAR === */
+  --navbar-height: 70px;
+  --navbar-bg: var(--background-color);
+  --navbar-text: var(--text-color);
+  --navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  
+  /* === FOOTER === */
+  --footer-bg: #1a1d20;
+  --footer-text: #e9ecef;
+  --footer-link: #adb5bd;
+  --footer-link-hover: var(--primary-light);
+}
+
+/* === MODO ESCURO === */
+:root[data-theme="dark"] {
+  /* Cores de fundo */
+  --background-color: #1a1d20;
+  --background-alt: #212529;
+  --background-section: #2a2d31;
+  
+  /* Cores de texto */
+  --text-color: #e9ecef;
+  --text-secondary: #adb5bd;
+  --text-muted: #6c757d;
+  
+  /* Bordas e sombras */
+  --border-color: #495057;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  
+  /* Navbar no modo escuro */
+  --navbar-bg: #212529;
+  --navbar-text: #e9ecef;
+  --navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  /* Footer no modo escuro */
+  --footer-bg: #0d0f11;
+  --footer-text: #adb5bd;
+  --footer-link: #868e96;
+  --footer-link-hover: var(--primary-light);
+  
+  /* Ajuste de cores primárias para melhor contraste */
+  --primary-color: #3d8bfd;
+  --accent-color: #4dd4ac;
+}

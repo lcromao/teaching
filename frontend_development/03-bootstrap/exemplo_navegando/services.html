@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Serviços - Empresa{% endblock %}
+
+{% block content %}
+  <!-- Page Header -->
+  <section class="py-5">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-3">Nossos Serviços</h1>
+      <p class="lead">Soluções completas para todas as necessidades do seu negócio</p>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <div class="mb-3">
+                <i class="bi bi-lightbulb-fill text-primary fs-1"></i>
+              </div>
+              <h3 class="card-title">Consultoria Estratégica</h3>
+              <p class="card-text">Análise profunda do seu negócio e desenvolvimento de estratégias personalizadas para maximizar resultados.</p>
+              <a href="contact.html" class="btn btn-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <div class="mb-3">
+                <i class="bi bi-code-slash text-primary fs-1"></i>
+              </div>
+              <h3 class="card-title">Desenvolvimento</h3>
+              <p class="card-text">Criação de soluções tecnológicas sob medida utilizando as melhores práticas e tecnologias do mercado.</p>
+              <a href="contact.html" class="btn btn-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="card text-center h-100">
+            <div class="card-body">
+              <div class="mb-3">
+                <i class="bi bi-headset text-primary fs-1"></i>
+              </div>
+              <h3 class="card-title">Suporte Técnico</h3>
+              <p class="card-text">Equipe especializada disponível para garantir o funcionamento perfeito das suas soluções.</p>
+              <a href="contact.html" class="btn btn-primary">Saiba Mais</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

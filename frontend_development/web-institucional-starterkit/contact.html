@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entre em contato conosco">
+  <title>Contato - Empresa</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dark-mode.css">
+  
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="assets/img/logo.svg" alt="Logo" height="40" class="me-2">
+        <span>Empresa</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Serviços</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Contato</a></li>
+          <li class="nav-item">
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar tema">
+              <span id="theme-icon">🌙</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="hero" style="padding: 4rem 0;">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-3">Entre em Contato</h1>
+      <p class="lead">Estamos prontos para atender você e transformar suas ideias em realidade</p>
+    </div>
+  </section>
+
+  <!-- Informações de Contato -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 mb-5">
+        <div class="col-lg-3 col-md-6">
+          <div class="card-custom text-center h-100">
+            <div class="card-icon">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <h5>Endereço</h5>
+            <p class="mb-0">Rua Exemplo, 123<br>Centro, São Paulo - SP<br>CEP: 01000-000</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card-custom text-center h-100">
+            <div class="card-icon">
+              <i class="bi bi-telephone-fill"></i>
+            </div>
+            <h5>Telefone</h5>
+            <p class="mb-0">
+              <a href="tel:+551112345678">(11) 1234-5678</a><br>
+              <a href="tel:+5511987654321">(11) 98765-4321</a><br>
+              Seg-Sex: 9h-18h
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card-custom text-center h-100">
+            <div class="card-icon">
+              <i class="bi bi-envelope-fill"></i>
+            </div>
+            <h5>E-mail</h5>
+            <p class="mb-0">
+              <a href="mailto:contato@empresa.com">contato@empresa.com</a><br>
+              <a href="mailto:suporte@empresa.com">suporte@empresa.com</a><br>
+              Resposta em 24h
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="card-custom text-center h-100">
+            <div class="card-icon">
+              <i class="bi bi-chat-dots-fill"></i>
+            </div>
+            <h5>Redes Sociais</h5>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulário de Contato -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card-custom">
+            <h2 class="mb-4 text-center">Envie sua Mensagem</h2>
+            <p class="text-center text-muted mb-4">Preencha o formulário abaixo e nossa equipe entrará em contato em breve</p>
+            
+            <form id="contactForm">
+              <div class="row g-3">
+                <!-- Nome -->
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Nome Completo *</label>
+                  <input type="text" class="form-control" id="name" name="name" required placeholder="Seu nome">
+                </div>
+
+                <!-- E-mail -->
+                <div class="col-md-6">
+                  <label for="email" class="form-label">E-mail *</label>
+                  <input type="email" class="form-control" id="email" name="email" required placeholder="seu@email.com">
+                </div>
+
+                <!-- Telefone -->
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Telefone</label>
+                  <input type="tel" class="form-control" id="phone" name="phone" placeholder="(11) 98765-4321">
+                </div>
+
+                <!-- Empresa -->
+                <div class="col-md-6">
+                  <label for="company" class="form-label">Empresa</label>
+                  <input type="text" class="form-control" id="company" name="company" placeholder="Nome da empresa">
+                </div>
+
+                <!-- Assunto -->
+                <div class="col-12">
+                  <label for="subject" class="form-label">Assunto *</label>
+                  <select class="form-select" id="subject" name="subject" required>
+                    <option value="">Selecione um assunto</option>
+                    <option value="orcamento">Solicitar Orçamento</option>
+                    <option value="consultoria">Consultoria</option>
+                    <option value="desenvolvimento">Desenvolvimento</option>
+                    <option value="suporte">Suporte Técnico</option>
+                    <option value="parceria">Parceria Comercial</option>
+                    <option value="outros">Outros Assuntos</option>
+                  </select>
+                </div>
+
+                <!-- Mensagem -->
+                <div class="col-12">
+                  <label for="message" class="form-label">Mensagem *</label>
+                  <textarea class="form-control" id="message" name="message" rows="6" required placeholder="Descreva sua necessidade ou dúvida"></textarea>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                    <label class="form-check-label" for="newsletter">
+                      Desejo receber novidades e conteúdos por e-mail
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Privacidade -->
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="privacy" name="privacy" required>
+                    <label class="form-check-label" for="privacy">
+                      Concordo com a <a href="#">Política de Privacidade</a> *
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Botão -->
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary-custom btn-lg w-100">
+                    <i class="bi bi-send-fill me-2"></i>Enviar Mensagem
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Mensagem de sucesso (oculta inicialmente) -->
+            <div id="successMessage" class="alert alert-success mt-4 d-none" role="alert">
+              <i class="bi bi-check-circle-fill me-2"></i>
+              <strong>Mensagem enviada com sucesso!</strong> Entraremos em contato em breve.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Perguntas Frequentes</h2>
+      <p class="section-subtitle">Encontre respostas rápidas para as dúvidas mais comuns</p>
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion" id="faqAccordion">
+            
+            <!-- FAQ 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+                  Qual o prazo médio para desenvolvimento de um projeto?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  O prazo varia conforme a complexidade do projeto. Projetos simples podem levar de 2 a 4 semanas, enquanto sistemas mais complexos podem levar de 3 a 6 meses. Após análise inicial, fornecemos um cronograma detalhado.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  Como funciona o processo de orçamento?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Após o primeiro contato, agendamos uma reunião para entender suas necessidades. Em seguida, elaboramos uma proposta detalhada com escopo, cronograma e valores. O orçamento é totalmente gratuito e sem compromisso.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  Oferecem suporte após a entrega do projeto?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Sim! Todos os projetos incluem garantia de 3 meses. Após esse período, oferecemos planos de suporte mensal com diferentes níveis de SLA para atender suas necessidades.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                  Trabalham com metodologias ágeis?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Sim, utilizamos metodologias ágeis como Scrum e Kanban. Isso garante entregas incrementais, transparência no processo e flexibilidade para ajustes durante o desenvolvimento.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                  Atendem empresas de todo o Brasil?
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Sim, atendemos clientes em todo o território nacional. Temos estrutura para trabalhar 100% remotamente, mas também realizamos visitas presenciais quando necessário.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mapa (Opcional) -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Nossa Localização</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card-custom p-0" style="height: 400px; overflow: hidden;">
+            <!-- Aqui você pode integrar Google Maps ou outro serviço de mapas -->
+            <div class="d-flex align-items-center justify-content-center h-100 bg-light">
+              <div class="text-center">
+                <i class="bi bi-geo-alt-fill display-1 text-primary mb-3"></i>
+                <h4>Rua Exemplo, 123</h4>
+                <p class="text-muted">Centro, São Paulo - SP</p>
+                <a href="https://maps.google.com" target="_blank" class="btn btn-primary-custom">
+                  <i class="bi bi-map me-2"></i>Ver no Google Maps
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <h5>Sobre a Empresa</h5>
+          <p>Somos uma empresa dedicada a fornecer soluções de qualidade para nossos clientes. Inovação, compromisso e excelência são nossos valores fundamentais.</p>
+          <div class="social-links mt-3">
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <h5>Links Rápidos</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">Sobre</a></li>
+            <li><a href="services.html">Serviços</a></li>
+            <li><a href="contact.html">Contato</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h5>Serviços</h5>
+          <ul class="list-unstyled">
+            <li><a href="services.html#consultoria">Consultoria</a></li>
+            <li><a href="services.html#desenvolvimento">Desenvolvimento</a></li>
+            <li><a href="services.html#suporte">Suporte</a></li>
+            <li><a href="services.html#treinamento">Treinamento</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <h5>Contato</h5>
+          <ul class="list-unstyled">
+            <li><i class="bi bi-geo-alt-fill me-2"></i>Rua Exemplo, 123</li>
+            <li><i class="bi bi-telephone-fill me-2"></i>(11) 1234-5678</li>
+            <li><i class="bi bi-envelope-fill me-2"></i>contato@empresa.com</li>
+            <li><i class="bi bi-clock-fill me-2"></i>Seg-Sex: 9h-18h</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="mb-0">&copy; 2025 Empresa. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/theme-toggle.js"></script>
+
+  <!-- Form Handler Script -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Aqui você pode adicionar lógica para enviar o formulário via AJAX
+      // Por enquanto, apenas mostramos a mensagem de sucesso
+      
+      const successMessage = document.getElementById('successMessage');
+      successMessage.classList.remove('d-none');
+      
+      // Limpar formulário
+      this.reset();
+      
+      // Scroll para a mensagem
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Ocultar mensagem após 5 segundos
+      setTimeout(() => {
+        successMessage.classList.add('d-none');
+      }, 5000);
+    });
+  </script>
+
+</body>
+</html>

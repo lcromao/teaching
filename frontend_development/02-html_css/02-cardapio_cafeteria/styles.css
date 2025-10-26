@@ -1,0 +1,14 @@
+/* styles.css — Cardápio Café */
+:root { --bg:#fffdf8; --text:#232220; --muted:#6b6a67; --accent:#8b5cf6; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Arial; color: var(--text); background: var(--bg); }
+.hero { padding: 48px 16px; text-align: center; background: conic-gradient(from 160deg at 50% 0%, #efe9ff, #fff0f0, #fffdf8); }
+.hero h1 { margin: 0; font-size: 2rem; }
+.hero p { margin: 8px 0 0; color: var(--muted); }
+.container { max-width: 820px; margin: 24px auto; padding: 0 16px; }
+h2 { margin-top: 32px; border-bottom: 2px solid #eee5ff; padding-bottom: 6px; }
+.menu { list-style: none; padding: 0; margin: 0; }
+.menu li { display:flex; justify-content: space-between; padding: 12px 8px; border-bottom: 1px dashed #e5e5e5; }
+.price { font-feature-settings: 'tnum' 1; font-variant-numeric: tabular-nums; color: var(--accent); }
+a { color: #2563eb; }
+.foot { text-align: center; padding: 24px 16px; color: var(--muted); }
