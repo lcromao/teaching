@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+SQLAlchemy
+pydantic
+email-validator
+python-jose[cryptography]
+bcrypt>=4.0.1
+pytest
