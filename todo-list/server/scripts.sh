@@ -2,19 +2,19 @@
 
 # Logging helpers
 print_status() {
-    echo -e "$[INFO]$ $1"
+    echo -e "[INFO] $1"
 }
 
 print_success() {
-    echo -e "$[SUCCESS]$ $1"
+    echo -e "[SUCCESS] $1"
 }
 
 print_warning() {
-    echo -e "$[WARNING]$ $1"
+    echo -e "[WARNING] $1"
 }
 
 print_error() {
-    echo -e "$[ERROR]$ $1"
+    echo -e "[ERROR] $1"
 }
 
 # Virtualenv helpers
@@ -36,6 +36,17 @@ activate_venv() {
     print_status "Activating virtual environment..."
     # shellcheck disable=SC1091
     source venv/bin/activate
+    print_success "Virtual environment activated"
+}
+
+activate_venv_windows() {
+    if [ ! -d "venv" ]; then
+        print_error "Virtual environment not found. Run './scripts.sh setup' first."
+        exit 1
+    fi
+    print_status "Activating virtual environment..."
+    # shellcheck disable=SC1091
+    source venv/Scripts/activate
     print_success "Virtual environment activated"
 }
 
@@ -91,12 +102,21 @@ case $1 in
         activate_venv
         install_deps
         ;;
+    setup-windows)
+        check_venv
+        activate_venv_windows
+        install_deps
+        ;;  
     test-unit)
         activate_venv
         run_unit_tests
         ;;
     dev)
         activate_venv
+        run_dev
+        ;;
+    dev-windows)
+        activate_venv_windows
         run_dev
         ;;
     clean)

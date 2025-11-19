@@ -1,6 +1,7 @@
 from database import SessionLocal, init_db
 from entities import User
 from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from schemas import (
@@ -29,6 +30,13 @@ from usecases import (
 
 app = FastAPI(title="Todo List API", version="2.0.0")
 http_bearer = HTTPBearer()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def get_db():
