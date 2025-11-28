@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Componentes React – Estilos, Fragment, Reutilização e Props</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<style>
+			:root {
+				--color-primary: #a3322c; /* Well Read */
+				--color-bg: #f0eae9; /* Ebb */
+				--color-bg-soft: #ffffff;
+				--color-accent: #b99592; /* Quicksand */
+				--color-light: #201c19; /* Zeus - agora cor principal de texto */
+				--color-muted: rgba(
+					32,
+					28,
+					25,
+					0.72
+				); /* Zeus suavizado para textos secundários */
+				--transition-fast: 0.25s ease;
+			}
+
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+					Roboto, sans-serif;
+				background: radial-gradient(
+					circle at top,
+					#ffffff 0%,
+					#f0eae9 55%,
+					#f0eae9 100%
+				);
+				color: var(--color-light);
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+			}
+
+			.deck {
+				position: relative;
+				aspect-ratio: 16 / 9;
+				width: min(90vw, 1400px);
+				max-height: 90vh;
+				background: linear-gradient(
+					145deg,
+					#ffffff 0%,
+					#f0eae9 40%,
+					#ffffff 100%
+				);
+				border-radius: 18px;
+				border: 1px solid rgba(163, 50, 44, 0.16);
+				box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12),
+					0 0 0 1px rgba(255, 255, 255, 0.9);
+				overflow: hidden;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.deck-header {
+				padding: 0.75rem 1.5rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				border-bottom: 1px solid rgba(32, 28, 25, 0.08);
+				background: linear-gradient(
+					90deg,
+					rgba(163, 50, 44, 0.06),
+					rgba(185, 149, 146, 0.18),
+					transparent
+				);
+				font-size: 0.9rem;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				color: var(--color-muted);
+			}
+
+			.deck-header-left {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.deck-logo {
+				width: 10px;
+				height: 10px;
+				border-radius: 999px;
+				background: var(--color-primary);
+				box-shadow: 0 0 0 4px rgba(163, 50, 44, 0.22);
+			}
+
+			.deck-title {
+				font-weight: 600;
+				color: var(--color-light);
+			}
+
+			.deck-header-right {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
+
+			.kbd {
+				border-radius: 4px;
+				border: 1px solid rgba(32, 28, 25, 0.14);
+				padding: 0.1rem 0.35rem;
+				font-size: 0.72rem;
+				text-transform: none;
+				letter-spacing: 0;
+				color: var(--color-light);
+				background: rgba(240, 234, 233, 0.9);
+			}
+
+			.deck-main {
+				flex: 1;
+				position: relative;
+				padding: 1.8rem 2.4rem 1.4rem;
+				overflow: hidden;
+			}
+
+			.slide {
+				position: absolute;
+				inset: 0;
+				padding: 0.75rem 0;
+				opacity: 0;
+				transform: translateX(40px) scale(0.98);
+				pointer-events: none;
+				transition: opacity var(--transition-fast),
+					transform var(--transition-fast);
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.slide.active {
+				opacity: 1;
+				transform: translateX(0) scale(1);
+				pointer-events: auto;
+			}
+
+			.slide-title {
+				font-size: 1.7rem;
+				font-weight: 650;
+				color: var(--color-light);
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
+
+			.slide-title::before {
+				content: "";
+				width: 10px;
+				height: 28px;
+				border-radius: 999px;
+				background: linear-gradient(
+					180deg,
+					var(--color-primary),
+					var(--color-accent)
+				);
+				box-shadow: 0 0 14px rgba(163, 50, 44, 0.6);
+			}
+
+			.slide-subtitle {
+				font-size: 1rem;
+				color: var(--color-muted);
+				max-width: 44rem;
+			}
+
+			.slide-body {
+				display: grid;
+				grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+				gap: 1.6rem;
+				flex: 1;
+				min-height: 0;
+				margin-top: 0.4rem;
+			}
+
+			.slide-body.full {
+				grid-template-columns: minmax(0, 1fr);
+			}
+
+			.col {
+				min-width: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+			}
+
+			.pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4rem;
+				font-size: 0.8rem;
+				padding: 0.2rem 0.7rem;
+				border-radius: 999px;
+				background: rgba(185, 149, 146, 0.25);
+				color: var(--color-light);
+				text-transform: uppercase;
+				letter-spacing: 0.09em;
+				border: 1px solid rgba(163, 50, 44, 0.26);
+			}
+
+			.pill-dot {
+				width: 6px;
+				height: 6px;
+				border-radius: 999px;
+				background: var(--color-primary);
+			}
+
+			ul {
+				list-style: none;
+				padding-left: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.45rem;
+				font-size: 0.97rem;
+				color: var(--color-light);
+			}
+
+			ul li {
+				position: relative;
+				padding-left: 1.1rem;
+			}
+
+			ul li::before {
+				content: "▹";
+				position: absolute;
+				left: 0;
+				top: 0;
+				color: var(--color-primary);
+				font-size: 0.9rem;
+			}
+
+			.note {
+				font-size: 0.85rem;
+				color: var(--color-muted);
+			}
+
+			.code-block {
+				background: radial-gradient(
+					circle at top left,
+					#fdfcfc 0%,
+					#ffffff 45%,
+					#f0eae9 100%
+				);
+				border-radius: 12px;
+				padding: 0.9rem 1rem;
+				font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+					Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+				font-size: 0.78rem;
+				line-height: 1.4;
+				color: var(--color-light);
+				border: 1px solid rgba(32, 28, 25, 0.08);
+				box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+				position: relative;
+			}
+
+			.code-block::before {
+				content: attr(data-label);
+				position: absolute;
+				top: 0.45rem;
+				right: 0.75rem;
+				font-size: 0.7rem;
+				color: rgba(32, 28, 25, 0.5);
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+			}
+
+			.code-block pre {
+				margin: 0;
+				white-space: pre;
+				overflow: auto;
+				max-height: 260px;
+			}
+
+			.deck-footer {
+				padding: 0.45rem 1.5rem 0.8rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				border-top: 1px solid rgba(32, 28, 25, 0.08);
+				background: radial-gradient(
+					circle at bottom,
+					rgba(185, 149, 146, 0.25),
+					transparent 45%
+				);
+			}
+
+			.progress {
+				flex: 1;
+				height: 4px;
+				border-radius: 999px;
+				background: rgba(32, 28, 25, 0.06);
+				overflow: hidden;
+			}
+
+			.progress-bar {
+				height: 100%;
+				width: 0%;
+				border-radius: inherit;
+				background: linear-gradient(
+					90deg,
+					var(--color-primary),
+					var(--color-accent)
+				);
+				transition: width var(--transition-fast);
+			}
+
+			.pager {
+				font-size: 0.8rem;
+				color: var(--color-muted);
+				min-width: 4.5rem;
+				text-align: right;
+			}
+
+			.nav-buttons {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.btn {
+				border-radius: 999px;
+				border: 1px solid rgba(32, 28, 25, 0.14);
+				background: #ffffff;
+				color: var(--color-light);
+				font-size: 0.8rem;
+				padding: 0.35rem 0.9rem;
+				cursor: pointer;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35rem;
+				transition: background var(--transition-fast),
+					transform var(--transition-fast), box-shadow var(--transition-fast),
+					border-color var(--transition-fast);
+				box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+			}
+
+			.btn-primary {
+				background: radial-gradient(
+					circle at top left,
+					#ffffff 0%,
+					var(--color-accent) 40%,
+					var(--color-primary) 100%
+				);
+				color: #ffffff;
+				border-color: rgba(163, 50, 44, 0.8);
+				box-shadow: 0 12px 26px rgba(163, 50, 44, 0.35);
+			}
+
+			.btn:hover {
+				transform: translateY(-1px);
+				background: #fdf7f6;
+				box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+			}
+
+			.btn-primary:hover {
+				background: radial-gradient(
+					circle at top left,
+					#ffffff 0%,
+					var(--color-primary) 40%,
+					#7b2520 100%
+				);
+			}
+
+			.btn:active {
+				transform: translateY(0);
+				box-shadow: none;
+			}
+
+			.btn[disabled] {
+				opacity: 0.45;
+				cursor: default;
+				transform: none;
+				box-shadow: none;
+			}
+
+			.btn-icon {
+				font-size: 0.9rem;
+			}
+
+			.hint {
+				font-size: 0.72rem;
+				color: var(--color-muted);
+			}
+
+			@media (max-width: 900px) {
+				.slide-title {
+					font-size: 1.4rem;
+				}
+				.slide-body {
+					grid-template-columns: minmax(0, 1fr);
+				}
+				.deck-main {
+					padding: 1.4rem 1.4rem 1.1rem;
+				}
+			}
+
+			@media (max-width: 640px) {
+				.deck-header {
+					padding-inline: 1rem;
+				}
+				.deck-footer {
+					padding-inline: 1rem;
+					flex-wrap: wrap;
+				}
+				.pager {
+					text-align: left;
+				}
+				.nav-buttons {
+					width: 100%;
+					justify-content: flex-end;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="deck" aria-label="Apresentação Componentes React">
+			<header class="deck-header">
+				<div class="deck-header-left">
+					<span class="deck-logo"></span>
+					<span class="deck-title">Componentes React</span>
+				</div>
+				<div class="deck-header-right">
+					<span class="hint">Navegue com</span>
+					<span class="kbd">←</span>
+					<span class="kbd">→</span>
+					<span class="kbd">Space</span>
+				</div>
+			</header>
+
+			<main class="deck-main">
+				<!-- 1. Slide Título - Componentes React -->
+				<section class="slide active">
+					<div class="slide-title">Componentes React</div>
+					<p class="slide-subtitle">
+						Estilizando componentes, compondo interfaces e reaproveitando
+						código em aplicações React.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<ul>
+								<li>
+									Como estilizar componentes com CSS tradicional, estilos
+									inline e CSS Modules.
+								</li>
+								<li>Como usar Fragment para evitar “divs” desnecessárias.</li>
+								<li>
+									Como reutilizar componentes e torná-los dinâmicos com props.
+								</li>
+								<li>
+									Como compor componentes com <code>children</code> e rest
+									props.
+								</li>
+							</ul>
+							<p class="note">
+								A ideia é sair desta aula pronto para escrever componentes mais
+								limpos, reutilizáveis e organizados.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 2. Estilizando Componentes - Introdução -->
+				<section class="slide">
+					<div class="slide-title">Estilizando Componentes – Introdução</div>
+					<p class="slide-subtitle">
+						Existem várias formas de estilizar componentes em React. Vamos
+						focar nas mais simples, sem bibliotecas extras.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<ul>
+								<li>CSS tradicional (arquivos <code>.css</code> globais).</li>
+								<li>
+									Estilos inline, usando o atributo <code>style</code> no JSX.
+								</li>
+								<li>CSS Modules, com escopo local por componente.</li>
+							</ul>
+							<p class="note">
+								Tudo com CSS + React, sem Tailwind, Styled Components ou outras
+								libs de estilo.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 3. CSS Tradicional - Estilos Globais -->
+				<section class="slide">
+					<div class="slide-title">CSS Tradicional – Estilos Globais</div>
+					<p class="slide-subtitle">
+						Primeiro, vamos criar estilos globais que se aplicam a toda a
+						aplicação.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<div class="pill">
+								<span class="pill-dot"></span><span>Passos</span>
+							</div>
+							<ul>
+								<li>
+									Dentro de <code>src</code>, crie a pasta <code>styles</code>.
+								</li>
+								<li>Crie o arquivo <code>globals.css</code>.</li>
+								<li>Defina resets e estilos padrão (body, h1, h2...).</li>
+							</ul>
+							<p class="note">
+								Esses estilos serão aplicados em qualquer componente, pois o
+								CSS é global.
+							</p>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="src/styles/globals.css">
+								<pre><code>* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  color: #f64348;
+  font-size: 2rem;
+}
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 4. CSS Tradicional - Resultado -->
+				<section class="slide">
+					<div class="slide-title">CSS Tradicional – Resultado</div>
+					<p class="slide-subtitle">
+						Para aplicar o arquivo global, basta importá-lo no ponto de entrada
+						da aplicação.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>
+									<code>main.jsx</code> é o arquivo que renderiza o
+									<code>&lt;App /&gt;</code>.
+								</li>
+								<li>
+									Ao importar <code>./styles/globals.css</code>, os estilos
+									valem para toda a app.
+								</li>
+								<li>
+									Sem precisar importar o CSS em cada componente
+									individualmente.
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="src/main.jsx">
+								<pre><code>import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import "./styles/globals.css"
+
+ReactDOM.createRoot(
+  document.getElementById('root')
+).render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;,
+)
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 5. Estilos Inline - Conceito -->
+				<section class="slide">
+					<div class="slide-title">Estilos Inline – Conceito</div>
+					<p class="slide-subtitle">
+						A segunda forma é usar estilos inline, diretamente no JSX via
+						atributo <code>style</code>.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<ul>
+								<li>
+									<code>style</code> recebe um
+									<strong>objeto JavaScript</strong>.
+								</li>
+								<li>
+									As propriedades CSS usam <strong>camelCase</strong>:
+									<code>backgroundColor</code>, <code>minHeight</code>.
+								</li>
+								<li>
+									Os valores normalmente são <strong>strings</strong>:
+									<code>"#2c2c2d"</code>, <code>"100vh"</code>.
+								</li>
+								<li>As propriedades do objeto são separadas por vírgula.</li>
+							</ul>
+							<p class="note">
+								Como estamos “na terra do JavaScript”, seguimos as regras de
+								objeto JS, e não a sintaxe de string do CSS.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 6. Estilos Inline - Exemplos Práticos -->
+				<section class="slide">
+					<div class="slide-title">Estilos Inline – Exemplos Práticos</div>
+					<p class="slide-subtitle">
+						Vamos estilizar a <code>div</code> principal do App e os
+						componentes de título usando estilos inline.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>
+									Container principal com grid, altura mínima e alinhamento
+									central.
+								</li>
+								<li><code>Title</code> com cor clara.</li>
+								<li>
+									<code>Subtitle</code> com cor clara e expressão JS no
+									conteúdo.
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="App + Title + Subtitle">
+								<pre><code>export default function App() {
+  return (
+    &lt;div
+      style={{
+        backgroundColor: "#2c2c2d",
+        display: "grid",
+        minHeight: "100vh",
+        placeContent: "center",
+        textAlign: "center"
+      }}
+    &gt;
+      &lt;Title /&gt;
+      &lt;Subtitle /&gt;
+      &lt;StatusText /&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default function Title() {
+  const tech = "React"
+  return &lt;h1 style={{ color: "#e5e5e5" }}&gt;
+           {tech} is awesome!
+         &lt;/h1&gt;
+}
+
+const Subtitle = () =&gt; (
+  &lt;h2 style={{ color: "#e5e5e5" }}&gt;
+    It's easy, like 1 + 1 is {1 + 1}
+  &lt;/h2&gt;
+)
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 7. Estilos Inline - Valores Dinâmicos -->
+				<section class="slide">
+					<div class="slide-title">Estilos Inline – Valores Dinâmicos</div>
+					<p class="slide-subtitle">
+						Estilos inline são ótimos para lidar com valores dinâmicos baseados
+						em variáveis e estados.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<ul>
+								<li>
+									Podemos usar operadores ternários e qualquer lógica JS para
+									definir estilos.
+								</li>
+								<li>
+									Exemplo: cor verde para status ON e vermelha para status OFF.
+								</li>
+							</ul>
+							<div class="code-block" data-label="StatusText.jsx">
+								<pre><code>export default () =&gt; {
+  const status = true
+
+  return (
+    &lt;h2
+      style={{
+        color: status ? "#00ff9f" : "#f64348"
+      }}
+    &gt;
+      Current status: {status ? "ON" : "OFF"}
+    &lt;/h2&gt;
+  )
+}
+</code></pre>
+							</div>
+							<p class="note">
+								Lembre: estilos inline têm prioridade sobre estilos globais e
+								valem apenas para aquele elemento.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 8. CSS Modules - Introdução -->
+				<section class="slide">
+					<div class="slide-title">CSS Modules – Introdução</div>
+					<p class="slide-subtitle">
+						CSS Modules são arquivos <code>.module.css</code> que viram módulos
+						JS com escopo local.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<ul>
+								<li>
+									Nome dos arquivos: <code>NomeDoComponente.module.css</code>.
+								</li>
+								<li>
+									Importados como um objeto JS:
+									<code>import styles from "./App.module.css"</code>.
+								</li>
+								<li>
+									Cada classe é mapeada para um nome único, evitando conflitos
+									globais.
+								</li>
+							</ul>
+							<p class="note">
+								Permitem separar estilização do componente, mantendo todos os
+								benefícios do CSS tradicional.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 9. CSS Modules - Na Prática -->
+				<section class="slide">
+					<div class="slide-title">CSS Modules – Na Prática</div>
+					<p class="slide-subtitle">
+						Vamos mover o estilo do container para um CSS Module e utilizá-lo
+						no <code>App</code>.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<div class="code-block" data-label="App.module.css">
+								<pre><code>.app {
+  background-color: #2c2c2d;
+  display: grid;
+  min-height: 100vh;
+  place-content: center;
+  text-align: center;
+}
+</code></pre>
+							</div>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="App.jsx">
+								<pre><code>import StatusText from "./components/StatusText"
+import Subtitle from "./components/Subtitle"
+import Title from "./components/Title"
+import styles from "./App.module.css"
+
+export default function App() {
+  return (
+    &lt;div className={styles.app}&gt;
+      &lt;Title /&gt;
+      &lt;Subtitle /&gt;
+      &lt;StatusText /&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+							</div>
+							<p class="note">
+								O código fica mais organizado, com layout no CSS e
+								lógica/estrutura no JSX.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 10. Comparação de Métodos de Estilização -->
+				<section class="slide">
+					<div class="slide-title">Comparação de Métodos de Estilização</div>
+					<p class="slide-subtitle">
+						Não existe uma abordagem “melhor” em termos absolutos. Cada uma é
+						mais adequada a um tipo de problema.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<ul>
+								<li>
+									<strong>CSS Global</strong>
+									<ul>
+										<li>Bom para resets, tipografia, layout base.</li>
+										<li>Risco de conflitos de nomes.</li>
+									</ul>
+								</li>
+								<li>
+									<strong>Estilos Inline</strong>
+									<ul>
+										<li>Ótimos para mudanças rápidas e estilos dinâmicos.</li>
+										<li>Ficam verbosos se usados para todo o layout.</li>
+									</ul>
+								</li>
+								<li>
+									<strong>CSS Modules</strong>
+									<ul>
+										<li>Escopo local, evita conflitos.</li>
+										<li>
+											Bom para componentes mais complexos e páginas inteiras.
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<p class="note">
+								A escolha deve ser guiada pelo contexto: global vs. local,
+								simples vs. complexo, estático vs. dinâmico.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 11. Fragment - O Problema -->
+				<section class="slide">
+					<div class="slide-title">Fragment – O Problema</div>
+					<p class="slide-subtitle">
+						No JSX, o componente deve sempre retornar um único elemento pai.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>
+									Não é permitido retornar dois elementos irmãos diretamente.
+								</li>
+								<li>
+									Exemplo: um <code>&lt;h1&gt;</code> e um
+									<code>&lt;Card /&gt;</code> soltos.
+								</li>
+								<li>Isso gera erro de compilação do JSX.</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="Exemplo com erro">
+								<pre><code>import Card from "./components/Card"
+
+export default function App() {
+  return (
+    &lt;h1&gt;Exercício 2&lt;/h1&gt;
+    &lt;Card /&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 12. Fragment - A Solução -->
+				<section class="slide">
+					<div class="slide-title">Fragment – A Solução</div>
+					<p class="slide-subtitle">
+						Clássica solução: embrulhar tudo em um elemento pai, normalmente
+						uma <code>&lt;div&gt;</code>.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>
+									Funciona, mas pode gerar excesso de
+									<code>&lt;div&gt;</code> no HTML.
+								</li>
+								<li>
+									O React oferece o <code>Fragment</code> para ter um “pai
+									invisível”.
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="div vs Fragment">
+								<pre><code>// Com div
+export default function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Exercício 2&lt;/h1&gt;
+      &lt;Card /&gt;
+    &lt;/div&gt;
+  )
+}
+
+// Com Fragment
+import { Fragment } from "react"
+
+export default function App() {
+  return (
+    &lt;Fragment&gt;
+      &lt;h1&gt;Exercício 2&lt;/h1&gt;
+      &lt;Card /&gt;
+    &lt;/Fragment&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 13. Fragment - Sintaxe Curta -->
+				<section class="slide">
+					<div class="slide-title">Fragment – Sintaxe Curta</div>
+					<p class="slide-subtitle">
+						A sintaxe curta <code>&lt;&gt; &lt;/&gt;</code> permite usar
+						Fragment sem importar nada.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<div class="code-block" data-label="Sintaxe curta">
+								<pre><code>import Card from "./components/Card"
+
+export default function App() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Exercício 2&lt;/h1&gt;
+      &lt;Card /&gt;
+    &lt;/&gt;
+  )
+}
+</code></pre>
+							</div>
+							<p class="note">
+								Mesmo efeito: respeita a regra do JSX (um pai só) sem poluir o
+								HTML com elementos extras.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 14. Reutilizando Componentes -->
+				<section class="slide">
+					<div class="slide-title">Reutilizando Componentes</div>
+					<p class="slide-subtitle">
+						Componentes existem para serem reutilizados. Basta renderizá-los
+						mais de uma vez.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>
+									No exercício do Card, podemos mostrar vários cards numa mesma
+									página.
+								</li>
+								<li>Todos usam a mesma definição de componente.</li>
+								<li>Neste momento, eles ainda são idênticos.</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="Reutilizando Card">
+								<pre><code>import Card from "./components/Card"
+
+export default function App() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Exercício 2&lt;/h1&gt;
+      &lt;Card /&gt;
+      &lt;Card /&gt;
+      &lt;Card /&gt;
+    &lt;/&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 15. Criando Button Reutilizável -->
+				<section class="slide">
+					<div class="slide-title">Criando Button Reutilizável</div>
+					<p class="slide-subtitle">
+						Vamos criar um componente <code>Button</code> que pode ser
+						reutilizado em qualquer lugar da aplicação.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<div class="code-block" data-label="components/Button/index.jsx">
+								<pre><code>import styles from "./styles.module.css"
+
+export default function Button() {
+  return (
+    &lt;button className={styles.wrapper}&gt;
+      Comprar agora
+    &lt;/button&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+						<div class="col">
+							<div
+								class="code-block"
+								data-label="components/Button/styles.module.css">
+								<pre><code>.wrapper {
+  background-color: #121212;
+  border: 0;
+  border-radius: .5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 2rem;
+  padding: .75em 1.25em;
+  transition: .3s;
+}
+
+.wrapper:hover {
+  cursor: pointer;
+  margin-left: .5rem;
+}
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 16. Props - Introdução -->
+				<section class="slide">
+					<div class="slide-title">Props – Introdução</div>
+					<p class="slide-subtitle">
+						Props são “argumentos” que passamos para componentes para torná-los
+						dinâmicos e configuráveis.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<ul>
+								<li>No exercício do Card, temos 3 cards iguais na tela.</li>
+								<li>
+									Queremos que cada card tenha título e imagem diferentes.
+								</li>
+								<li>
+									Em vez de criar 3 componentes diferentes, usamos props.
+								</li>
+							</ul>
+							<p class="note">
+								Assim como passamos atributos para tags HTML, passamos props
+								para componentes React.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 17. Props - Passando Atributos -->
+				<section class="slide">
+					<div class="slide-title">Props – Passando Atributos</div>
+					<p class="slide-subtitle">
+						Primeiro, fazemos o componente aceitar um parâmetro (normalmente
+						chamado <code>props</code>).
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<div class="code-block" data-label="Card.jsx">
+								<pre><code>export default function Card(props) {
+  return (
+    // ...
+  )
+}
+</code></pre>
+							</div>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="App.jsx">
+								<pre><code>import Card from "./components/Card"
+
+export default function App() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Exercício 2&lt;/h1&gt;
+      &lt;Card title="Pôster: Star Wars (1977)" /&gt;
+      &lt;Card title="Pôster: Empire Strikes Back (1980)" /&gt;
+      &lt;Card title="Pôster: Return of the Jedi (1983)" /&gt;
+    &lt;/&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 18. Props - Usando no Componente -->
+				<section class="slide">
+					<div class="slide-title">Props – Usando no Componente</div>
+					<p class="slide-subtitle">
+						Dentro do componente, usamos <code>props.algumaCoisa</code> para
+						acessar o valor enviado.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<div class="code-block" data-label="Card.jsx">
+								<pre><code>import posterImg from "../../assets/sw-poster.jpg"
+import styles from "./styles.module.css"
+
+export default function Card(props) {
+  return (
+    &lt;div className={styles.container}&gt;
+      &lt;img
+        className={styles.poster}
+        src={posterImg}
+        alt="Star Wars poster"
+      /&gt;
+      &lt;div&gt;
+        &lt;h2 className={styles.title}&gt;
+          {props.title}
+        &lt;/h2&gt;
+        &lt;p className={styles.description}&gt;
+          Um pôster decorativo épico do filme Star Wars...
+        &lt;/p&gt;
+        &lt;button className={styles.button}&gt;
+          Comprar agora
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+						<div class="col">
+							<p class="note">
+								A estrutura do Card é a mesma, mas o conteúdo (título) muda
+								conforme a prop enviada no JSX.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 19. Props - Múltiplas Props -->
+				<section class="slide">
+					<div class="slide-title">Props – Múltiplas Props</div>
+					<p class="slide-subtitle">
+						Podemos passar várias props, não apenas texto, mas também imagens,
+						números, etc.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<div class="code-block" data-label="App.jsx">
+								<pre><code>import Card from "./components/Card"
+import swPosterImg from "./assets/sw-poster.jpg"
+import esbPosterImg from "./assets/esb-poster.jpg"
+import rotjPosterImg from "./assets/rotj-poster.jpg"
+
+export default function App() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Exercício 2&lt;/h1&gt;
+      &lt;Card
+        title="Pôster: Star Wars (1977)"
+        poster={swPosterImg}
+      /&gt;
+      &lt;Card
+        title="Pôster: Empire Strikes Back (1980)"
+        poster={esbPosterImg}
+      /&gt;
+      &lt;Card
+        title="Pôster: Return of the Jedi (1983)"
+        poster={rotjPosterImg}
+      /&gt;
+    &lt;/&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+						<div class="col">
+							<p class="note">
+								Agora cada Card recebe título e imagem específicos, mas todos
+								usam a mesma definição de componente.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 20. Props - Desestruturação -->
+				<section class="slide">
+					<div class="slide-title">Props – Desestruturação</div>
+					<p class="slide-subtitle">
+						É comum desestruturar props direto na assinatura da função para
+						evitar repetir <code>props.</code>.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<div class="code-block" data-label="Card.jsx (desestruturado)">
+								<pre><code>import styles from "./styles.module.css"
+
+export default function Card({ title, poster }) {
+  return (
+    &lt;div className={styles.container}&gt;
+      &lt;img
+        className={styles.poster}
+        src={poster}
+        alt={title}
+      /&gt;
+      &lt;div&gt;
+        &lt;h2 className={styles.title}&gt;{title}&lt;/h2&gt;
+        &lt;p className={styles.description}&gt;
+          Um pôster decorativo épico do filme.
+        &lt;/p&gt;
+        &lt;button className={styles.button}&gt;
+          Comprar agora
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+							</div>
+							<p class="note">
+								Fica mais legível quando o componente usa muitas props.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 21. Children - O Problema -->
+				<section class="slide">
+					<div class="slide-title">Children – O Problema</div>
+					<p class="slide-subtitle">
+						Às vezes, só props “planas” não são suficientes. Precisamos passar
+						estruturas de conteúdo mais ricas.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>
+									Um componente <code>Title</code> que recebe apenas
+									<code>text</code> fica limitado.
+								</li>
+								<li>
+									Se quisermos ícones, botões, spans, teríamos que criar muitas
+									props específicas.
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="Title limitado">
+								<pre><code>import styles from "./styles.module.css"
+
+export default function Title(props) {
+  return (
+    &lt;h2 className={styles.wrapper}&gt;
+      {props.text}
+    &lt;/h2&gt;
+  )
+}
+
+// Uso em Profile
+&lt;Title text={props.name} /&gt;
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 22. Children - A Solução -->
+				<section class="slide">
+					<div class="slide-title">Children – A Solução</div>
+					<p class="slide-subtitle">
+						A prop especial <code>children</code> representa tudo o que é
+						passado entre as tags do componente.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>
+									<code>children</code> é recebida automaticamente em todos os
+									componentes.
+								</li>
+								<li>
+									Podemos usá-la no lugar de uma prop como <code>text</code>.
+								</li>
+								<li>
+									Isso abre espaço para qualquer JSX dentro do componente.
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="Title com children">
+								<pre><code>import styles from "./styles.module.css"
+
+export default function Title(props) {
+  return (
+    &lt;h2 className={styles.wrapper}&gt;
+      {props.children}
+    &lt;/h2&gt;
+  )
+}
+
+// Uso
+&lt;Title&gt;{props.name}&lt;/Title&gt;
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 23. Children - Flexibilidade -->
+				<section class="slide">
+					<div class="slide-title">Children – Flexibilidade</div>
+					<p class="slide-subtitle">
+						Com <code>children</code>, podemos passar qualquer combinação de
+						elementos para dentro do componente.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>Texto + botão, ícones, spans, links etc.</li>
+								<li>
+									O componente <code>Title</code> continua simples e genérico.
+								</li>
+								<li>
+									Não precisamos alterar o componente sempre que mudarmos o
+									layout interno.
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="Title flexível">
+								<pre><code>&lt;Title&gt;
+  &lt;span&gt;{props.name}&lt;/span&gt;
+  &lt;button&gt;Follow&lt;/button&gt;
+&lt;/Title&gt;
+</code></pre>
+							</div>
+							<p class="note">
+								O Title não sabe que existe um botão; ele só renderiza o que
+								veio em <code>children</code>.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- 24. Children - ProfileSection -->
+				<section class="slide">
+					<div class="slide-title">Children – ProfileSection</div>
+					<p class="slide-subtitle">
+						Vamos criar o <code>ProfileSection</code> para substituir
+						<code>&lt;div&gt;</code> com estilos de seção.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<div class="code-block" data-label="ProfileSection.jsx">
+								<pre><code>import styles from "./styles.module.css"
+
+export default function ProfileSection(props) {
+  return (
+    &lt;div className={styles.wrapper}&gt;
+      {props.children}
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="Uso em Profile">
+								<pre><code>&lt;ProfileSection&gt;{props.bio}&lt;/ProfileSection&gt;
+&lt;ProfileSection&gt;{props.phone}&lt;/ProfileSection&gt;
+&lt;ProfileSection&gt;{props.email}&lt;/ProfileSection&gt;
+&lt;ProfileSection&gt;
+  &lt;div className={styles.links}&gt;
+    &lt;a href={props.githubUrl} target="_blank"&gt;GitHub&lt;/a&gt;
+    &lt;a href={props.linkedinUrl} target="_blank"&gt;LinkedIn&lt;/a&gt;
+    &lt;a href={props.twitterUrl} target="_blank"&gt;Twitter&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/ProfileSection&gt;
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 25. Children - LinkButton -->
+				<section class="slide">
+					<div class="slide-title">Children – LinkButton</div>
+					<p class="slide-subtitle">
+						O <code>LinkButton</code> usa <code>children</code> para o texto
+						interno e <code>href</code> para o destino.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<div class="code-block" data-label="LinkButton.jsx">
+								<pre><code>import styles from "./styles.module.css"
+
+export default function LinkButton(props) {
+  return (
+    &lt;a
+      className={styles.wrapper}
+      href={props.href}
+      target="_blank"
+    &gt;
+      {props.children}
+    &lt;/a&gt;
+  )
+}
+</code></pre>
+							</div>
+						</div>
+						<div class="col">
+							<div class="code-block" data-label="Uso em Profile">
+								<pre><code>&lt;ProfileSection&gt;
+  &lt;div className={styles.links}&gt;
+    &lt;LinkButton href={props.githubUrl}&gt;
+      GitHub
+    &lt;/LinkButton&gt;
+    &lt;LinkButton href={props.linkedinUrl}&gt;
+      LinkedIn
+    &lt;/LinkButton&gt;
+    &lt;LinkButton href={props.twitterUrl}&gt;
+      Twitter
+    &lt;/LinkButton&gt;
+  &lt;/div&gt;
+&lt;/ProfileSection&gt;
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 26. Rest Params com Props -->
+				<section class="slide">
+					<div class="slide-title">Rest Params com Props</div>
+					<p class="slide-subtitle">
+						Podemos repassar qualquer prop recebida pelo componente para o
+						elemento interno usando <code>{`{...props}`}</code>.
+					</p>
+					<div class="slide-body">
+						<div class="col">
+							<ul>
+								<li>
+									Queremos passar <code>className</code>, <code>id</code>,
+									<code>data-*</code>, <code>aria-*</code> para a
+									<code>&lt;div&gt;</code> de <code>ProfileSection</code>.
+								</li>
+								<li>
+									Em vez de listar manualmente, usamos o operador spread
+									<code>...props</code>.
+								</li>
+								<li>
+									Tomamos cuidado para manter a classe base
+									<code>styles.wrapper</code>.
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<div
+								class="code-block"
+								data-label="ProfileSection.jsx (rest props)">
+								<pre><code>import styles from "./styles.module.css"
+
+export default function ProfileSection(props) {
+  return (
+    &lt;div
+      {...props}
+      className={`${styles.wrapper} ${props.className}`}
+    &gt;
+      {props.children}
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+							</div>
+							<div class="code-block" data-label="Uso com props extras">
+								<pre><code>&lt;ProfileSection
+  className={styles.links}
+  id="links-section"
+  data-test="some value"
+  aria-label="social links"
+&gt;
+  &lt;LinkButton href={props.githubUrl}&gt;GitHub&lt;/LinkButton&gt;
+  &lt;LinkButton href={props.linkedinUrl}&gt;LinkedIn&lt;/LinkButton&gt;
+  &lt;LinkButton href={props.twitterUrl}&gt;Twitter&lt;/LinkButton&gt;
+&lt;/ProfileSection&gt;
+</code></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- 27. Resumo e Próximos Passos -->
+				<section class="slide">
+					<div class="slide-title">Resumo e Próximos Passos</div>
+					<p class="slide-subtitle">
+						Fechando a aula com um panorama do que você viu e para onde podemos
+						avançar.
+					</p>
+					<div class="slide-body full">
+						<div class="col">
+							<ul>
+								<li>
+									Três formas de estilização:
+									<ul>
+										<li>CSS Global.</li>
+										<li>Estilos Inline (incluindo valores dinâmicos).</li>
+										<li>CSS Modules.</li>
+									</ul>
+								</li>
+								<li>
+									Uso de <code>Fragment</code> e sintaxe curta
+									<code>&lt;&gt; &lt;/&gt;</code>.
+								</li>
+								<li>
+									Reutilização de componentes (<code>Card</code>,
+									<code>Button</code>, <code>LinkButton</code>).
+								</li>
+								<li>
+									Props para parametrizar componentes: títulos, imagens e
+									outros dados.
+								</li>
+								<li>
+									<code>children</code> para composição de layouts mais ricos.
+								</li>
+								<li>
+									Rest props (<code>{`{...props}`}</code>) para repassar
+									atributos ao DOM.
+								</li>
+							</ul>
+							<p class="note">
+								Próximos passos: callbacks via props (eventos), validação de
+								props, padrões de composição mais avançados e bibliotecas de
+								estilo.
+							</p>
+						</div>
+					</div>
+				</section>
+			</main>
+
+			<footer class="deck-footer">
+				<div class="progress" aria-hidden="true">
+					<div class="progress-bar" id="progress-bar"></div>
+				</div>
+				<div class="pager" id="pager">1 / 27</div>
+				<div class="nav-buttons">
+					<button class="btn" id="btn-prev">
+						<span class="btn-icon">←</span> Anterior
+					</button>
+					<button class="btn btn-primary" id="btn-next">
+						Próximo <span class="btn-icon">→</span>
+					</button>
+				</div>
+			</footer>
+		</div>
+
+		<script>
+			(function () {
+				const slides = Array.from(document.querySelectorAll(".slide"));
+				const pager = document.getElementById("pager");
+				const progressBar = document.getElementById("progress-bar");
+				const btnPrev = document.getElementById("btn-prev");
+				const btnNext = document.getElementById("btn-next");
+
+				let current = 0;
+
+				function update() {
+					slides.forEach((s, i) => {
+						s.classList.toggle("active", i === current);
+					});
+
+					pager.textContent = current + 1 + " / " + slides.length;
+					const progress = ((current + 1) / slides.length) * 100;
+					progressBar.style.width = progress + "%";
+
+					btnPrev.disabled = current === 0;
+					btnNext.disabled = current === slides.length - 1;
+				}
+
+				function nextSlide() {
+					if (current < slides.length - 1) {
+						current++;
+						update();
+					}
+				}
+
+				function prevSlide() {
+					if (current > 0) {
+						current--;
+						update();
+					}
+				}
+
+				btnPrev.addEventListener("click", prevSlide);
+				btnNext.addEventListener("click", nextSlide);
+
+				document.addEventListener("keydown", (event) => {
+					const key = event.key;
+					if (key === "ArrowRight" || key === "PageDown" || key === " ") {
+						event.preventDefault();
+						nextSlide();
+					} else if (key === "ArrowLeft" || key === "PageUp") {
+						event.preventDefault();
+						prevSlide();
+					}
+				});
+
+				update();
+			})();
+		</script>
+	</body>
+</html>
