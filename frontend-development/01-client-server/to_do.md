@@ -19,7 +19,7 @@
 
 - **Objetivo:** Visualizar uma requisição HTTP em sua forma bruta para entender o protocolo.
 - **Passo a Passo:**
-  1. Inicie um servidor local (ex: `uvicorn server:app --reload`).
+  1. Inicie um servidor local (ex: `node server.js`).
   2. Em outro terminal, conecte-se ao servidor via Telnet:
      ```bash
      # Conecta ao servidor local na porta 8000
