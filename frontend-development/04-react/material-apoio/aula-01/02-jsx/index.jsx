@@ -14,3 +14,5 @@ const anotherElement = (
 		</ul>
 	</div>
 );
+
+// O navegador não entende JSX, então precisamos transpilar esse código para JavaScript puro.

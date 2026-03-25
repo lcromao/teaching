@@ -1,8 +1,6 @@
 # Estilizando Componentes
 
-E aí, programador! o/
-
-Nessa aula você vai aprender algumas das diferentes formas de se estilizar um componente React. Existem muitas formas de trabalhar a estilização de um componente, por isso essa aula vai ser focada apenas nas mais simples, que não necessitam de nenhuma biblioteca e usam apenas CSS e o próprio React.
+Existem muitas formas de trabalhar a estilização de um componente, por isso essa aula vai ser focada apenas nas mais simples, que não necessitam de nenhuma biblioteca e usam apenas CSS e o próprio React.
 
 Vamos lá!
 
@@ -54,7 +52,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 ## Passo 4: Resultado
 
-Com isso temos o arquivo CSS aplicado na página.
+Com isso temos o arquivo CSS aplicado globalmente.
 
 ## Passo 5: Estilos inline
 

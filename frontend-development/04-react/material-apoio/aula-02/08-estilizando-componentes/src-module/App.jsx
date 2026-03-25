@@ -6,11 +6,12 @@ import StatusText from "./components/StatusText";
 import styles from "./App.module.css";
 
 export default function App() {
-	return (
-		<div className={styles.app}>
-			<Title />
-			<Subtitle />
-			<StatusText />
-		</div>
-	);
+  return (
+    // Definimos a classe do elemento utilizando o objeto styles, que é o resultado da importação do arquivo CSS como módulo.
+    <div className={styles.app}>
+      <Title />
+      <Subtitle />
+      <StatusText />
+    </div>
+  );
 }
