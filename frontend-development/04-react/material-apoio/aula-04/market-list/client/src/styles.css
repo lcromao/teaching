@@ -1,0 +1,162 @@
+body,
+ul,
+li {
+    font-family: tahoma;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(225, 222, 199);
+}
+
+header {
+    background-color: rgb(225, 222, 199);
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+.title {
+    color: white;
+    width: 100%;
+    background-color: rgb(35, 32, 24);
+    display: inline-block;
+    padding: 2px 0px;
+    position: sticky;
+    top: 0px;
+}
+
+.banner {
+    height: 300px;
+    overflow: hidden;
+}
+
+.banner img {
+    margin: 0px 0px 0px 0px;
+    width: 100%;
+}
+
+.newItem {
+    background-color: rgb(225, 222, 199);
+    padding: 30px 40px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.newItem:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#newInput {
+    margin: 0;
+    border: 1px solid rgb(35, 32, 24);
+    width: 25%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#newQuantity {
+    margin: 0;
+    border: 1px solid rgb(35, 32, 24);
+    width: 8%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#newPrice {
+    margin: 0;
+    border: 1px solid rgb(35, 32, 24);
+    width: 5%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+.addBtn {
+    padding: 9px 10px;
+    background-color: rgb(35, 32, 24);
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.addBtn:hover {
+    background-color: #2ab53a;
+    color: white;
+}
+
+.items {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.actionsColumn {
+    width: 72px;
+    text-align: center;
+}
+
+.deleteHeaderIcon {
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+.deleteButton {
+    background-color: #f44336;
+    color: #fff7f2;
+    border: 0;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0;
+}
+
+.deleteButton:hover {
+    background-color: #d93a2f;
+    transform: scale(1.06);
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+table tr:hover {
+    background-color: #f5f5f5;
+}
+
+table th {
+    background-color: rgb(35, 32, 24);
+    color: white;
+    text-align: left;
+    padding: 12px;
+}
+
+table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+table th, table td {
+    text-align: left;
+}
+
+table th.actionsColumn,
+table td.actionsColumn {
+    text-align: center;
+}
